@@ -36,13 +36,13 @@ public class Equipo {
         this.nombre = nombre;
     }
     public boolean addCiclista(Ciclista c) {
-	for (int i = 0; i<= this.ciclistas.size(); i++) {
-	    if (this.ciclistas.get(i).getNombre().equals(c.getNombre())){
-		return false;
-	    }
-	}
-	this.ciclistas.add(c);
-	return true;
+        for (int i = 0; i<= this.ciclistas.size(); i++) {
+            if (this.ciclistas.get(i).getNombre().equals(c.getNombre())){
+                return false;
+            }
+        }
+        this.ciclistas.add(c);
+        return true;
     }
     public boolean removeCiclista(String n){
 	for (int i = 0; i <= this.ciclistas.size(); i++){

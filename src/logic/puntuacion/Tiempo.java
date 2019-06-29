@@ -2,7 +2,7 @@ package logic.puntuacion;
 
 
 
-public class Tiempo extends Puntaje{
+public class Tiempo{
 
 
 
@@ -50,11 +50,14 @@ public class Tiempo extends Puntaje{
                                 this.getSegundos());
         if (op.equals("+")){
 
+
+
         }
         else if (op.){
+
+
 
         }
         return null;
     }
-
 }
