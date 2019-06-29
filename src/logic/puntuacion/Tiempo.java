@@ -2,7 +2,7 @@ package logic.puntuacion;
 
 
 
-public class Tiempo implements Puntaje{
+public class Tiempo {
 
 
 
@@ -44,7 +44,7 @@ public class Tiempo implements Puntaje{
 
 
 
-    @Override
+
     public Tiempo calcularPuntos(Tiempo t, String op){
         if(op.equals("+")){
             int tmp1 = t.getSegundos() + this.segundos;
