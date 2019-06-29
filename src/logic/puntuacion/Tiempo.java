@@ -24,19 +24,19 @@ public class Tiempo extends Puntaje{
 
 
     public int getHoras() {
-        return horas;
+        return this.horas;
     }
     public void setHoras(int horas) {
         this.horas = horas;
     }
     public int getMinutos() {
-        return minutos;
+        return this.minutos;
     }
     public void setMinutos(int minutos) {
         this.minutos = minutos;
     }
     public int getSegundos() {
-        return segundos;
+        return this.segundos;
     }
     public void setSegundos(int segundos) {
         this.segundos = segundos;
@@ -45,13 +45,13 @@ public class Tiempo extends Puntaje{
 
 
     @Override
-    public Puntaje calcularPuntos(Tiempo t, String op){
+    public Puntaje calcularPuntos(Puntaje p, String op){
         Tiempo tmp = new Tiempo(this.getHoras(), this.getMinutos(),
                                 this.getSegundos());
         if (op.equals("+")){
 
         }
-        else if (op.){
+        else if (op.equals("-")){
 
         }
         return null;
