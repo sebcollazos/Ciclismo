@@ -2,7 +2,7 @@ package logic.puntuacion;
 
 
 
-public class Tiempo extends Puntaje{
+public class Tiempo implements Puntaje{
 
 
 

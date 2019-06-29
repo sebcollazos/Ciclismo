@@ -1,7 +1,7 @@
 package logic.puntuacion;
 
-abstract public class Puntaje {
+public interface Puntaje {
 
 
-    abstract public Puntaje calcularPuntos(Puntaje p, String op);
+    Puntaje calcularPuntos(Puntaje p, String op);
 }
