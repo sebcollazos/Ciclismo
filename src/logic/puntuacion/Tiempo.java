@@ -45,16 +45,26 @@ public class Tiempo implements Puntaje{
 
 
     @Override
-    public Puntaje calcularPuntos(Puntaje p, String op){
-        Tiempo tmp = new Tiempo(this.getHoras(), this.getMinutos(),
-                                this.getSegundos());
-        if (op.equals("+")){
-
+    public Tiempo calcularPuntos(Tiempo t, String op){
+        if(op.equals("+")){
+            int tmp1 = t.getSegundos() + this.segundos;
+            if (tmp1 >= 60){
+                this.segundos = tmp1 - 60;
+                this.minutos = this.minutos + 1;
+            }
+            else{
+                this.segundos = tmp1;
+            }
+            int tmp2 = minutos + this.minutos;
+            if (tmp2 >= 60){
+                this.minutos = tmp2 - 60;
+                this.horas = this.horas + 1;
+            }
+            else{
+                this.minutos = tmp2;
+            }
+            this.horas = this.horas + horas;
         }
-        else if (op.equals("-")){
-
-        }
-        return null;
     }
 
 }
