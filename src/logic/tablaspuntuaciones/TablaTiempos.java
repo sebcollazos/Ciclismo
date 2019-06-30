@@ -1,7 +1,7 @@
 package logic.tablaspuntuaciones;
 import logic.ciclistas.Registro;
-import logic.tiempo.Tiempo;
 import java.util.ArrayList;
+
 
 
 public class TablaTiempos extends Tabla {
@@ -26,7 +26,7 @@ public class TablaTiempos extends Tabla {
 
 
     @Override
-    public void ordenar(){
+    public void ordenar() {
         for (int i = 0; i< super.getTabla().size() - 1; i++){
             Registro tmp1 = super.getTabla().get(i);
             int num1 = tmp1.getTiempo().getSegundos() +
