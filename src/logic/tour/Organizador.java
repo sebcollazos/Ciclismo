@@ -1,5 +1,7 @@
 package logic.tour;
 
+import logic.tablaspuntuaciones.Tabla;
+
 import java.util.ArrayList;
 
 public class Organizador {
@@ -64,6 +66,12 @@ public class Organizador {
 
 
         return categoria;
+
+    }
+
+    public ArrayList<Tabla> actualizarTTiempos(){
+
+
 
     }
 
