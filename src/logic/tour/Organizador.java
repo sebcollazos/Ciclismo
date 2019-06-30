@@ -12,7 +12,11 @@ public class Organizador {
         this.nombre = nombre;
     }
 
-    public ArrayList<Double> calcularPuntosMontania(Double aF, Double aI, Double Km){
+    public ArrayList<Double> calcularPuntosMontania(Etapa etapa){
+
+        Double aF= etapa.getAlturaFinal();
+        Double aI= etapa.getAlturaInicial();
+        Double Km= etapa.getKilometros();
 
         Double gradoMontaña= ((aF-aI)/Km) *  100;
         ArrayList<Double> categoria= new ArrayList<>();
