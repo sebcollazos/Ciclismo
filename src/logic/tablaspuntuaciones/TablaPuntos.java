@@ -25,6 +25,7 @@ public class TablaPuntos extends Tabla {
     }
 
 
+
     @Override
     public void ordenar() {
         for (int i = 0; i< super.getTabla().size() - 1; i++){
