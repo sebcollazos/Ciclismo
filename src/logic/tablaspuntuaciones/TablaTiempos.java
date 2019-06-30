@@ -3,7 +3,7 @@ import logic.tiempo.Tiempo;
 import java.util.ArrayList;
 
 
-public class TablaTiempo implements Tabla {
+public class TablaTiempos implements Tabla {
 
 
 
@@ -20,10 +20,10 @@ public class TablaTiempo implements Tabla {
 
 
 
-    public TablaTiempo() {
+    public TablaTiempos() {
 
     }
-    public TablaTiempo(ArrayList<Tiempo> tabla) {
+    public TablaTiempos(ArrayList<Tiempo> tabla) {
         this.tabla = tabla;
     }
 
