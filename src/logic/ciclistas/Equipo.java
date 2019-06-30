@@ -1,5 +1,4 @@
-package logic.equipo;
-import logic.ciclista.Ciclista;
+package logic.ciclistas;
 import java.util.ArrayList;
 
 public class Equipo {

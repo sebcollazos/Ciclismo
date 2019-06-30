@@ -1,5 +1,5 @@
 package logic.tour;
-import logic.equipo.Equipo;
+import logic.ciclistas.Equipo;
 import java.util.ArrayList;
 
 public class Tour {

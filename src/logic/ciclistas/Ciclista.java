@@ -1,4 +1,4 @@
-package logic.ciclista;
+package logic.ciclistas;
 
 public class Ciclista {
 
