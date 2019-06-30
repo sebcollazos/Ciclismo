@@ -5,10 +5,12 @@ import java.util.ArrayList;
 public class Tour {
     private String nombre;
     private ArrayList<Equipo> equipos;
+    private ArrayList<Etapa> etapas;
 
-    public Tour(String nombre, ArrayList<Equipo> equipos) {
+    public Tour(String nombre, ArrayList<Equipo> equipos, ArrayList<Etapa> etapas) {
         this.nombre = nombre;
         this.equipos = equipos;
+        this.etapas= etapas;
     }
 
     public String getNombre() {
