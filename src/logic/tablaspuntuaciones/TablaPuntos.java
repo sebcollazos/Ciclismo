@@ -3,7 +3,7 @@ import java.util.ArrayList;
 
 
 
-public class TablaPuntos implements Tabla {
+public class TablaPuntos extends Tabla {
 
 
     //Preguntar
