@@ -3,7 +3,7 @@ import java.util.ArrayList;
 
 
 
-public class TablaPunto implements Tabla {
+public class TablaPuntos implements Tabla {
 
 
     //Preguntar
@@ -20,10 +20,10 @@ public class TablaPunto implements Tabla {
 
 
 
-    public TablaPunto() {
+    public TablaPuntos() {
 
     }
-    public TablaPunto(ArrayList<Double> tabla) {
+    public TablaPuntos(ArrayList<Double> tabla) {
         this.tabla = tabla;
     }
 
