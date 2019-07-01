@@ -20,16 +20,25 @@ public class Organizador {
 
 
 
+    public String getNombre() {
+        return nombre;
+    }
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+
+
     public ArrayList<Double> calcularPuntosMontania(Etapa etapa){
 
         Double aF= etapa.getAlturaFinal();
         Double aI= etapa.getAlturaInicial();
         Double Km= etapa.getKilometros();
 
-        Double gradoMontaña= ((aF-aI)/Km) *  100;
+        Double gradoMontania= ((aF-aI)/Km) *  100;
         ArrayList<Double> categoria= new ArrayList<>();
 
-        if(gradoMontaña >= 140 && gradoMontaña <250){
+        if(gradoMontania >= 140 && gradoMontania <250){
 
             Double p= 20.0;
 
@@ -42,7 +51,7 @@ public class Organizador {
                 }
             }
 
-        }else if(gradoMontaña >= 80 && gradoMontaña <140){
+        }else if(gradoMontania >= 80 && gradoMontania <140){
 
             Double p= 10.0;
 
@@ -55,7 +64,7 @@ public class Organizador {
                 }
             }
 
-        }else if(gradoMontaña >= 50 && gradoMontaña <80){
+        }else if(gradoMontania >= 50 && gradoMontania <80){
             Double p= 5.0;
             Double b= 1.0;
 
@@ -64,14 +73,14 @@ public class Organizador {
                 categoria.add(i, p);
                 p= p-b;
             }
-        }else if(gradoMontaña >= 30 && gradoMontaña <50){
+        }else if(gradoMontania >= 30 && gradoMontania <50){
             Double p= 2.0;
 
             for(int i=0 ; i < 1; i++){
                 categoria.add(i, p);
                 p= p-1.0;
             }
-        }else if(gradoMontaña >= 20 && gradoMontaña <30){
+        }else if(gradoMontania >= 20 && gradoMontania <30){
             categoria.add(0, 1.0);
         }
 
