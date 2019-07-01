@@ -1,4 +1,5 @@
 package logic.tour;
+import logic.tiempo.Tiempo;
 import java.util.ArrayList;
 
 
@@ -77,6 +78,8 @@ public class Organizador {
         return categoria;
 
     }
+
+
 
     public ArrayList<TablaPuntos> actualizarTablaPuntos(TablaPuntos puntos){
 
