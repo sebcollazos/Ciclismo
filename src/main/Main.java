@@ -37,13 +37,16 @@ public class Main {
 
                 c= crearCiclisita(parrafo, c);
 
-                //ciclistas= agregarCiclista(c, ciclistas);
+
+                agregarCiclista(c, ciclistas);
+
+
 
                 System.out.println(c.getNombre()+" "+c.getNacionalidad());
 
             }
 
-            /*if(ciclistas != null){
+            if(ciclistas != null){
 
                 for(int i=0; i< ciclistas.size(); i++){
 
@@ -51,7 +54,7 @@ public class Main {
 
                 }
 
-            }*/
+            }
 
         }
         catch(Exception e){
@@ -92,15 +95,13 @@ public class Main {
 
     }
 
-    public static ArrayList<Ciclista> agregarCiclista(Ciclista c, ArrayList<Ciclista> ciclistas){
+    public static void agregarCiclista(Ciclista c, ArrayList<Ciclista> ciclistas){
 
         int contador= 0;
 
-        ArrayList<Ciclista> Cc= ciclistas;
-
         for(int i= 0; i < ciclistas.size(); i++){
 
-            if(ciclistas.get(i).getNombre().equals(c.getNombre())){
+            if(ciclistas.get(i).getNombre().equals(c.getNombre()) && c!= null){
 
                 contador++;
 
@@ -110,11 +111,9 @@ public class Main {
 
         if(contador == 0){
 
-            Cc.add(c);
+            ciclistas.add(c);
 
         }
-
-        return Cc;
 
     }
 
