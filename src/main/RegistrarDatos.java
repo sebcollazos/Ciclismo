@@ -90,10 +90,10 @@ public class RegistrarDatos {
         for(int i = 0; i < this.getCantidadCiclistas(); i++){
 
             Boolean salir = false;
-            //nombre, nacionalidad, edad, peso, estatura
-            try{
-                while (salir.equals(false)) {
 
+            //nombre, nacionalidad, edad, peso, estatura
+            while (salir.equals(false)){
+                try{
                     System.out.println("Digite el nombre del ciclista " + i +":" );
                     String nombretmp = br.readLine();
                     System.out.println("Digite la nacionalidad del ciclista " + i +":" );
@@ -107,18 +107,18 @@ public class RegistrarDatos {
                     System.out.print("Digite la estatura del ciclista " + i +":" );
                     String strestaturatmp = br.readLine();
                     Double estaturatmp = Double.parseDouble(stredadtmp);
-
                     if ((edadtmp > 0) && (pesotmp > 0.0) && (estaturatmp > 0.0)){
                         Ciclista tmp = new Ciclista(nombretmp, nacionalidadtmp, edadtmp, pesotmp, estaturatmp);
                         this.participantes.add(tmp);
                         salir = true;
                     }
                     else {
-                        System.out.println("Algun dato no valido");
+                        System.out.println("Algun dato no valido\n");
                     }
                 }
-            }catch (IOException | NumberFormatException e){
-                System.out.println("Dato no valido");
+                catch (IOException | NumberFormatException e){
+                    System.out.println("Dato no valido\n");
+                }
             }
         }
     }
