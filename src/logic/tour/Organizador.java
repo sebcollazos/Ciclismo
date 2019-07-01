@@ -1,4 +1,6 @@
 package logic.tour;
+import logic.tablaspuntuaciones.Tabla;
+
 import java.util.ArrayList;
 
 
@@ -78,7 +80,7 @@ public class Organizador {
 
     }
 
-    public ArrayList<TablaPuntos> actualizarTablaPuntos(TablaPuntos puntos){
+    public ArrayList<Tabla> actualizarTablaPuntos(Tabla puntos){
 
 
 
