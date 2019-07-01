@@ -24,6 +24,7 @@ public class Main {
 
             // Lectura del fichero
             String linea;
+
             ArrayList<Ciclista> ciclistas= new ArrayList<>();
 
             while((linea=br.readLine())!=null ) {
