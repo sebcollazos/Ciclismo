@@ -1,6 +1,7 @@
 package logic.tour;
 import logic.ciclistas.Registro;
 import logic.tablaspuntuaciones.Tabla;
+import logic.tiempo.Tiempo;
 
 import java.util.ArrayList;
 
@@ -92,19 +93,25 @@ public class Organizador {
 
     public Tabla actualizarTablaTiempos(Tour tour){
 
-        Tabla tablaGeneral= new Tabla();
 
-        tablaGeneral= tour.getEtapas().get(0).getLista();
-
+        Tabla tablaGeneral= tour.getEtapas().get(0).getLista();
 
 
-        for(int i=0; i < tablaGeneral.getTabla().size(); i++){
 
-            for(int j= 1; j < tour.getEtapas().size(); j++){
 
-                if(tablaGeneral.getTabla().get(i).getCiclista().getNombre().equals(tour.getEtapas().get(j).getLista().getTabla().get(j).getCiclista().getNombre())){
+        for(int i=1; i < tablaGeneral.getTabla().size() ; i++){
 
-                    tablaGeneral.getTabla().get(i).getTiempo().calcularTiempo( tour.getEtapas().get(j).getLista().getTabla().get(j).getTiempo(), "+" );
+            for(int j= 1; j < tour.getEtapas().size() ; j++){
+
+                String nombreTablaGeneral= tablaGeneral.getTabla().get(i).getCiclista().getNombre();
+                String nombreEtapa= tour.getEtapas().get(j).getLista().getTabla().get(j).getCiclista().getNombre();
+
+                Tiempo tiempoTablaGeneral= tablaGeneral.getTabla().get(i).getTiempo();
+                Tiempo tiempoTablaEtapa= tour.getEtapas().get(i).getLista().getTabla().get(i).getTiempo();
+
+                if(nombreTablaGeneral.equals(nombreEtapa)){
+
+                    tiempoTablaGeneral.calcularTiempo( tiempoTablaEtapa , "+" );
 
                 }
 
@@ -122,21 +129,25 @@ public class Organizador {
 
         ArrayList<Double> puntos;
 
-        Tabla tablaPuntos= new Tabla();
 
-        tablaPuntos= tour.getEtapas().get(0).getLista();
+        Tabla tablaPuntos= tour.getEtapas().get(0).getLista();
 
         for(int i=0; i < tablaPuntos.getTabla().size(); i++){
 
             for(int j= 1; j < tour.getEtapas().size(); j++){
 
-                if(tablaPuntos.getTabla().get(i).getCiclista().getNombre().equals(tour.getEtapas().get(j).getLista().getTabla().get(j).getCiclista().getNombre())){
+                puntos= this.calcularPuntosMontania(tour.getEtapas().get(j));
 
-                    tour.getEtapas().get(j).getLista().organizar();
+                sumarPuntosEtapa(tour.getEtapas().get(j), puntos);
 
-                    puntos= this.calcularPuntosMontania(tour.getEtapas().get(j));
+                String nombreTablaGeneral= tablaPuntos.getTabla().get(i).getCiclista().getNombre();
+                String nombreEtapa= tour.getEtapas().get(j).getLista().getTabla().get(j).getCiclista().getNombre();
 
+                Double PuntosTotales= tour.getEtapas().get(j).getLista().getTabla().get(j).getPuntos() + tablaPuntos.getTabla().get(i).getPuntos();
 
+                if(nombreTablaGeneral.equals(nombreEtapa)){
+
+                    tablaPuntos.getTabla().get(i).setPuntos(PuntosTotales);
 
                 }
 
@@ -148,10 +159,14 @@ public class Organizador {
 
     }
 
-    public void sumarPuntos(Etapa etapa, ArrayList<Double> puntos){
+    public void sumarPuntosEtapa(Etapa etapa, ArrayList<Double> puntos){
 
+        etapa.getLista().organizar();
 
-
+        for (int i = 0; i < puntos.size(); i++){
+            etapa.getLista().getTabla().get(i).setPuntos(
+                etapa.getLista().getTabla().get(i).getPuntos() + puntos.get(i));
+        }
 
     }
 
