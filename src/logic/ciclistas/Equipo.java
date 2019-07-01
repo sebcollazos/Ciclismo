@@ -11,10 +11,10 @@ public class Equipo {
 
     }
 
-    public Equipo(ArrayList<Ciclista> cicistas, String nombre, String codigo) {
+    public Equipo(ArrayList<Ciclista> cicistas, String nombre) {
         this.ciclistas = cicistas;
         this.nombre = nombre;
-        this.codigo = codigo;
+        generarCodigo();
     }
 
     public ArrayList<Ciclista> getCicistas() {
