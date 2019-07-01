@@ -1,5 +1,5 @@
 package logic.tour;
-import logic.ciclistas.Ciclista;
+import  logic.ciclistas.Ciclista;
 import logic.ciclistas.Registro;
 import logic.tablaspuntuaciones.Tabla;
 import logic.tiempo.Tiempo;
