@@ -10,7 +10,7 @@ public class Ciclista {
     private Double estatura;
 
 
-    public Ciclista( ) {
+    public Ciclista(String nombre, String s, int nacionalidad) {
 
     }
 

@@ -15,7 +15,7 @@ public class Organizador {
 
 
 
-    public Organizador(java.lang.String nombre) {
+    public Organizador(String nombre) {
         this.nombre = nombre;
     }
 
