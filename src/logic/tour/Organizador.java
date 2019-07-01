@@ -120,6 +120,8 @@ public class Organizador {
 
     public Tabla actualizarTablaPuntos(Tour tour){
 
+        ArrayList<Double> puntos;
+
         Tabla tablaPuntos= new Tabla();
 
         tablaPuntos= tour.getEtapas().get(0).getLista();
@@ -130,7 +132,11 @@ public class Organizador {
 
                 if(tablaPuntos.getTabla().get(i).getCiclista().getNombre().equals(tour.getEtapas().get(j).getLista().getTabla().get(j).getCiclista().getNombre())){
 
-                    tablaPuntos.getTabla().get(i).setPuntos();
+                    tour.getEtapas().get(j).getLista().organizar();
+
+                    puntos= this.calcularPuntosMontania(tour.getEtapas().get(j));
+
+
 
                 }
 
@@ -139,6 +145,13 @@ public class Organizador {
         }
 
         return tablaPuntos;
+
+    }
+
+    public void sumarPuntos(Etapa etapa, ArrayList<Double> puntos){
+
+        
+
 
     }
 
