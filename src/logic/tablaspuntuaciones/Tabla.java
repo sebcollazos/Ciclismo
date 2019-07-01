@@ -4,11 +4,12 @@ import java.util.ArrayList;
 
 
 
-abstract class Tabla {
+public class Tabla {
 
 
 
     private ArrayList<Registro> tabla;
+
 
 
     public Tabla(){
@@ -29,12 +30,7 @@ abstract class Tabla {
 
 
 
-    public void cambiar(int i, Registro tmp2, int k, Registro tmp1){
-        this.tabla.set(i, tmp2);
-        this.tabla.set(k, tmp1);
+    public void addRegistro(Registro r){
+        tabla.add(r);
     }
-
-
-
-    public abstract void ordenar();
 }
