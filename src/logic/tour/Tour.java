@@ -30,4 +30,8 @@ public class Tour {
     public void setEquipos(ArrayList<Equipo> equipos) {
         this.equipos = equipos;
     }
+
+    public ArrayList<Etapa> getEtapas() {
+        return etapas;
+    }
 }

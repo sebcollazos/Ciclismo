@@ -80,11 +80,33 @@ public class Organizador {
 
     }
 
-    public ArrayList<Tabla> actualizarTablaPuntos(Tabla puntos){
+    public ArrayList<Tabla> sumarTablaTiempos(Tour tour){
+
+        ArrayList<Tabla> tablaGeneral= new ArrayList<>();
+
+        for(int i=0; i < tour.getEtapas().get(0).getLista().getTabla().size(); i++){
+
+            tablaGeneral.add(tour.getEtapas().get(0).getLista());
+
+        }
 
 
 
-        return null;
+        for(int i=0; i < tablaGeneral.size(); i++){
+
+            for(int j= 1; j < tour.getEtapas().size(); j++){
+
+                if(tablaGeneral.get(i).getTabla().get(i).getCiclista().getNombre().equals(tour.getEtapas().get(j).getLista().getTabla().get(j).getCiclista().getNombre())){
+
+                    tablaGeneral.get(i).getTabla().get(i).getTiempo().calcularTiempo( tour.getEtapas().get(j).getLista().getTabla().get(j).getTiempo(), "+" );
+
+                }
+
+            }
+
+        }
+
+        return tablaGeneral;
 
     }
 
