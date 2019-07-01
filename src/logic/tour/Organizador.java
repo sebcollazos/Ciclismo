@@ -150,7 +150,7 @@ public class Organizador {
 
     public void sumarPuntos(Etapa etapa, ArrayList<Double> puntos){
 
-        
+
 
 
     }
