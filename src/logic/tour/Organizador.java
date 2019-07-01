@@ -1,4 +1,5 @@
 package logic.tour;
+import logic.ciclistas.Registro;
 import logic.tablaspuntuaciones.Tabla;
 
 import java.util.ArrayList;
@@ -80,31 +81,29 @@ public class Organizador {
 
     }
 
-    public ArrayList<Tabla> sumarTablaTiempos(Tour tour){
+    public Tabla actualizarTablaTiempos(Tour tour){
 
-        ArrayList<Tabla> tablaGeneral= new ArrayList<>();
+        Tabla tablaGeneral= new Tabla();
 
-        for(int i=0; i < tour.getEtapas().get(0).getLista().getTabla().size(); i++){
-
-            tablaGeneral.add(tour.getEtapas().get(0).getLista());
-
-        }
+        tablaGeneral= tour.getEtapas().get(0).getLista();
 
 
 
-        for(int i=0; i < tablaGeneral.size(); i++){
+        for(int i=0; i < tablaGeneral.getTabla().size(); i++){
 
             for(int j= 1; j < tour.getEtapas().size(); j++){
 
-                if(tablaGeneral.get(i).getTabla().get(i).getCiclista().getNombre().equals(tour.getEtapas().get(j).getLista().getTabla().get(j).getCiclista().getNombre())){
+                if(tablaGeneral.getTabla().get(i).getCiclista().getNombre().equals(tour.getEtapas().get(j).getLista().getTabla().get(j).getCiclista().getNombre())){
 
-                    tablaGeneral.get(i).getTabla().get(i).getTiempo().calcularTiempo( tour.getEtapas().get(j).getLista().getTabla().get(j).getTiempo(), "+" );
+                    tablaGeneral.getTabla().get(i).getTiempo().calcularTiempo( tour.getEtapas().get(j).getLista().getTabla().get(j).getTiempo(), "+" );
 
                 }
 
             }
 
         }
+
+        tablaGeneral.organizar();
 
         return tablaGeneral;
 
