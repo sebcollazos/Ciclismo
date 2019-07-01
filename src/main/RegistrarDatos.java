@@ -1,5 +1,6 @@
 package main;
 import logic.ciclistas.Ciclista;
+import logic.ciclistas.Equipo;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -12,13 +13,13 @@ public class RegistrarDatos {
     private String organizador;
     private int cantidadCiclistas;
     private ArrayList<Ciclista> participantes;
+    private ArrayList<Equipo> equipos;
 
 
 
-    public RegistrarDatos(String organizador, int cantidadCiclistas, ArrayList<Ciclista> participantes) {
-        this.organizador = organizador;
-        this.cantidadCiclistas = cantidadCiclistas;
-        this.participantes = participantes;
+    public RegistrarDatos() {
+        participantes = new ArrayList<>();
+        equipos = new ArrayList<>();
     }
 
 
@@ -40,6 +41,12 @@ public class RegistrarDatos {
     }
     public void setParticipantes(ArrayList<Ciclista> participantes) {
         this.participantes = participantes;
+    }
+    public ArrayList<Equipo> getEquipos() {
+        return equipos;
+    }
+    public void setEquipos(ArrayList<Equipo> equipos) {
+        this.equipos = equipos;
     }
 
 
@@ -82,7 +89,7 @@ public class RegistrarDatos {
 
 
 
-    public void registrarCiclistas() throws IOException {
+    public void registrarCiclistas() {
 
         System.out.println("Registro de participantes: ");
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -121,5 +128,31 @@ public class RegistrarDatos {
                 }
             }
         }
+        registarEquipos();
+    }
+
+
+
+    public void registarEquipos() throws IOException {
+
+        System.out.println("Registro de participantes: ");
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+        try{
+            for (int i = 0; i < this.participantes.size(); i++){
+                Equipo tmp = new Equipo();
+                Boolean salir = false;
+                while (salir.equals(false)){
+                    String nombre = this.getParticipantes().get(i).getNombre();
+                    System.out.println("A que equipo pertenece el ciclista "+ nombre + ":");
+                    String strpesotmp = br.readLine();
+
+                }
+            }
+        }
+        catch (NullPointerException e){
+            System.out.println("No hay equipos registrados");
+        }
+
     }
 }
