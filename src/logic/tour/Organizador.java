@@ -109,4 +109,28 @@ public class Organizador {
 
     }
 
+    public Tabla actualizarTablaPuntos(Tour tour){
+
+        Tabla tablaPuntos= new Tabla();
+
+        tablaPuntos= tour.getEtapas().get(0).getLista();
+
+        for(int i=0; i < tablaPuntos.getTabla().size(); i++){
+
+            for(int j= 1; j < tour.getEtapas().size(); j++){
+
+                if(tablaPuntos.getTabla().get(i).getCiclista().getNombre().equals(tour.getEtapas().get(j).getLista().getTabla().get(j).getCiclista().getNombre())){
+
+                    tablaPuntos.getTabla().get(i).setPuntos();
+
+                }
+
+            }
+
+        }
+
+        return tablaPuntos;
+
+    }
+
 }
