@@ -1,5 +1,4 @@
 package logic.tour;
-import logic.tablaspuntuaciones.TablaPuntos;
 import java.util.ArrayList;
 
 
@@ -17,7 +16,7 @@ public class Organizador {
     }
 
 
-    
+
     public ArrayList<Double> calcularPuntosMontania(Etapa etapa){
 
         Double aF= etapa.getAlturaFinal();

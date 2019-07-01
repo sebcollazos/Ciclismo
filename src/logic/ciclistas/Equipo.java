@@ -2,6 +2,7 @@ package logic.ciclistas;
 import java.util.ArrayList;
 
 public class Equipo {
+
     private ArrayList<Ciclista> ciclistas;
     private String nombre;
     private String codigo;
