@@ -27,9 +27,12 @@ public class Main {
 
             String[] parrafo= null;
 
+            ArrayList<Equipo> equipos= new ArrayList<>();
+
             ArrayList<Ciclista> ciclistas= new ArrayList<>();
 
             Equipo e= null;
+
 
             while((linea=br.readLine())!=null ) {
 
@@ -48,14 +51,13 @@ public class Main {
 
                 crearequipo(e, parrafo, ciclistas);
 
+                agregarEquipo(e, equipos);
+
             }
 
+            if(equipos != null){
 
-
-
-            if(e != null){
-
-                for(int i=0; i< e.getCicistas().size(); i++){
+                for(int i=0; i< equipos.get(0).getCicistas().size(); i++){
 
                     System.out.println(e.getNombre());
 
@@ -131,6 +133,28 @@ public class Main {
         e.setNombre(p[0]);
 
         e.setCicistas(c);
+
+    }
+
+    public static void agregarEquipo(Equipo e, ArrayList<Equipo> equipos){
+
+        int contador= 0;
+
+        for(int i= 0; i < equipos.size(); i++){
+
+            if(equipos.get(i).getNombre().equals(e.getNombre()) && e!= null){
+
+                contador++;
+
+            }
+
+        }
+
+        if(contador == 0){
+
+            equipos.add(e);
+
+        }
 
     }
 

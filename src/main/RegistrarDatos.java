@@ -51,7 +51,7 @@ public class RegistrarDatos {
 
 
 
-    public void crearTour() {
+    public void crearTour() throws IOException {
 
         System.out.println("Bienvenido al sistema de registro");
 
@@ -89,7 +89,7 @@ public class RegistrarDatos {
 
 
 
-    public void registrarCiclistas() {
+    public void registrarCiclistas() throws IOException {
 
         System.out.println("Registro de participantes: ");
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -150,7 +150,7 @@ public class RegistrarDatos {
 
 
 
-    public void registrarEquipos(){
+    public void registrarEquipos() throws IOException {
 
         System.out.println("Registro de participantes: ");
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
