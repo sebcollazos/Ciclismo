@@ -44,8 +44,11 @@ public class Main {
 
                 c= crearCiclisita(parrafo, c);
 
+                if(parrafo.length >= 7){
 
-                agregarCiclista(c, ciclistas);
+                    agregarCiclista(c, ciclistas);
+
+                }
 
                 e= new Equipo();
 
@@ -142,19 +145,20 @@ public class Main {
 
         for(int i= 0; i < equipos.size(); i++){
 
-            if(equipos.get(i).getNombre().equals(e.getNombre()) && e!= null){
+            if(equipos.get(i).getNombre().equals(e.getNombre()) && e != null){
 
                 contador++;
+
+            }
+            else{
+
+                equipos.add(e);
 
             }
 
         }
 
-        if(contador == 0){
 
-            equipos.add(e);
-
-        }
 
     }
 
