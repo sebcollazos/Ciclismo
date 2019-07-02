@@ -8,7 +8,7 @@ public class Equipo {
     private String codigo;
 
     public Equipo() {
-
+        ciclistas = new ArrayList<>();
     }
 
     public Equipo(ArrayList<Ciclista> cicistas, String nombre) {

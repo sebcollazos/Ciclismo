@@ -1,5 +1,6 @@
 package main;
 import logic.ciclistas.Ciclista;
+import logic.ciclistas.Equipo;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -12,13 +13,13 @@ public class RegistrarDatos {
     private String organizador;
     private int cantidadCiclistas;
     private ArrayList<Ciclista> participantes;
+    private ArrayList<Equipo> equipos;
 
 
 
-    public RegistrarDatos(String organizador, int cantidadCiclistas, ArrayList<Ciclista> participantes) {
-        this.organizador = organizador;
-        this.cantidadCiclistas = cantidadCiclistas;
-        this.participantes = participantes;
+    public RegistrarDatos() {
+        participantes = new ArrayList<>();
+        equipos = new ArrayList<>();
     }
 
 
@@ -41,10 +42,16 @@ public class RegistrarDatos {
     public void setParticipantes(ArrayList<Ciclista> participantes) {
         this.participantes = participantes;
     }
+    public ArrayList<Equipo> getEquipos() {
+        return equipos;
+    }
+    public void setEquipos(ArrayList<Equipo> equipos) {
+        this.equipos = equipos;
+    }
 
 
 
-    public void crearTour() throws IOException {
+    public void crearTour() {
 
         System.out.println("Bienvenido al sistema de registro");
 
@@ -82,7 +89,7 @@ public class RegistrarDatos {
 
 
 
-    public void registrarCiclistas() throws IOException {
+    public void registrarCiclistas() {
 
         System.out.println("Registro de participantes: ");
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -108,9 +115,26 @@ public class RegistrarDatos {
                     String strestaturatmp = br.readLine();
                     Double estaturatmp = Double.parseDouble(stredadtmp);
                     if ((edadtmp > 0) && (pesotmp > 0.0) && (estaturatmp > 0.0)){
-                        Ciclista tmp = new Ciclista(nombretmp, nacionalidadtmp, edadtmp, pesotmp, estaturatmp);
-                        this.participantes.add(tmp);
-                        salir = true;
+                        if (i == 0){
+                            Ciclista tmp = new Ciclista(nombretmp, nacionalidadtmp, edadtmp, pesotmp, estaturatmp);
+                            this.participantes.add(tmp);
+                            salir = true;
+                        }
+                        else{
+                            Boolean registrado = false;
+                            for (int a = 0; a < this.participantes.size(); a++){
+                                String nombre = this.participantes.get(a).getNombre();
+                                if (nombre.equals(nombretmp)){
+                                    System.out.println("Ciclista ya registrado");
+                                    registrado = true;
+                                }
+                            }
+                            if (registrado.equals(false)){
+                                Ciclista tmp = new Ciclista(nombretmp, nacionalidadtmp, edadtmp, pesotmp, estaturatmp);
+                                this.participantes.add(tmp);
+                                salir = true;
+                            }
+                        }
                     }
                     else {
                         System.out.println("Algun dato no valido\n");
@@ -119,6 +143,26 @@ public class RegistrarDatos {
                 catch (IOException | NumberFormatException e){
                     System.out.println("Dato no valido\n");
                 }
+            }
+        }
+        registrarEquipos();
+    }
+
+
+
+    public void registrarEquipos(){
+
+        System.out.println("Registro de participantes: ");
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+        for (int i = 0; i < this.participantes.size(); i++){
+            Equipo tmp = new Equipo();
+            Boolean salir = false;
+            while (salir.equals(false)){
+                String nombre = this.getParticipantes().get(i).getNombre();
+                System.out.println("A que equipo pertenece el ciclista "+ nombre + ":");
+                String strpesotmp = br.readLine();
+
             }
         }
     }
