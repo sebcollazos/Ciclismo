@@ -122,12 +122,14 @@ public class RegistrarDatos {
                         }
                         else{
                             Boolean registrado = false;
-                            for (int a = 0; a < this.participantes.size(); a++){
+                            int a = 0;
+                            while(a < this.participantes.size() && registrado.equals(false)){
                                 String nombre = this.participantes.get(a).getNombre();
                                 if (nombre.equals(nombretmp)){
                                     System.out.println("Ciclista ya registrado");
                                     registrado = true;
                                 }
+                                a = a + 1;
                             }
                             if (registrado.equals(false)){
                                 Ciclista tmp = new Ciclista(nombretmp, nacionalidadtmp, edadtmp, pesotmp, estaturatmp);
@@ -156,13 +158,59 @@ public class RegistrarDatos {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
         for (int i = 0; i < this.participantes.size(); i++){
-            Equipo tmp = new Equipo();
+
             Boolean salir = false;
             while (salir.equals(false)){
-                String nombre = this.getParticipantes().get(i).getNombre();
+                Ciclista ciclistatmp = this.getParticipantes().get(i);
+                String nombre = ciclistatmp.getNombre();
                 System.out.println("A que equipo pertenece el ciclista "+ nombre + ":");
-                String strpesotmp = br.readLine();
+                String nombretmp = br.readLine();
+                if (i == 0){
+                    Equipo equipotmp = new Equipo();
+                    equipotmp.setNombre(nombretmp);
+                    equipotmp.addCiclista(ciclistatmp);
+                    this.equipos.add(equipotmp);
+                    salir = true;
+                }
+                else{
+                    Boolean existente = false;
+                    int a = 0;
+                    while (a < this.equipos.size() && existente.equals(false)){
+                        if (this.getEquipos().get(a).getNombre().equals(nombretmp)){
+                            this.equipos.get(a).addCiclista(ciclistatmp);
+                            existente = true;
+                            salir = true;
+                        }
+                        a = a + 1;
+                    }
+                    if (existente.equals(false)){
+                        System.out.println("El equipo no existe, desea registrarlo [1]Si [2]No :");
+                        try {
+                            String optmp = br.readLine();
+                            int op = Integer.parseInt(optmp);
+                            switch (op){
+                                case 1:
+                                    Equipo equipotmp = new Equipo();
+                                    equipotmp.setNombre(nombretmp);
+                                    equipotmp.addCiclista(ciclistatmp);
+                                    this.equipos.add(equipotmp);
+                                    salir = true;
+                                break;
 
+                                case 2:
+                                    System.out.println("Digite bien el nombre");
+                                break;
+
+                                default:
+                                    System.out.println("Opcion no valida, escriba nuevamente los datos");
+                                break;
+                            }
+                        }
+                        catch (IOException | NumberFormatException e) {
+                            System.out.println("Opcion no valida");
+                        }
+                    }
+                }
             }
         }
     }
