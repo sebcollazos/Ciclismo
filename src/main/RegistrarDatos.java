@@ -51,7 +51,7 @@ public class RegistrarDatos {
 
 
 
-    public void crearTour() throws IOException {
+    public void crearTour() {
 
         System.out.println("Bienvenido al sistema de registro");
 
@@ -115,9 +115,26 @@ public class RegistrarDatos {
                     String strestaturatmp = br.readLine();
                     Double estaturatmp = Double.parseDouble(stredadtmp);
                     if ((edadtmp > 0) && (pesotmp > 0.0) && (estaturatmp > 0.0)){
-                        Ciclista tmp = new Ciclista(nombretmp, nacionalidadtmp, edadtmp, pesotmp, estaturatmp);
-                        this.participantes.add(tmp);
-                        salir = true;
+                        if (i == 0){
+                            Ciclista tmp = new Ciclista(nombretmp, nacionalidadtmp, edadtmp, pesotmp, estaturatmp);
+                            this.participantes.add(tmp);
+                            salir = true;
+                        }
+                        else{
+                            Boolean registrado = false;
+                            for (int a = 0; a < this.participantes.size(); a++){
+                                String nombre = this.participantes.get(a).getNombre();
+                                if (nombre.equals(nombretmp)){
+                                    System.out.println("Ciclista ya registrado");
+                                    registrado = true;
+                                }
+                            }
+                            if (registrado.equals(false)){
+                                Ciclista tmp = new Ciclista(nombretmp, nacionalidadtmp, edadtmp, pesotmp, estaturatmp);
+                                this.participantes.add(tmp);
+                                salir = true;
+                            }
+                        }
                     }
                     else {
                         System.out.println("Algun dato no valido\n");
@@ -128,31 +145,25 @@ public class RegistrarDatos {
                 }
             }
         }
-        registarEquipos();
+        registrarEquipos();
     }
 
 
 
-    public void registarEquipos() throws IOException {
+    public void registrarEquipos(){
 
         System.out.println("Registro de participantes: ");
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-        try{
-            for (int i = 0; i < this.participantes.size(); i++){
-                Equipo tmp = new Equipo();
-                Boolean salir = false;
-                while (salir.equals(false)){
-                    String nombre = this.getParticipantes().get(i).getNombre();
-                    System.out.println("A que equipo pertenece el ciclista "+ nombre + ":");
-                    String strpesotmp = br.readLine();
+        for (int i = 0; i < this.participantes.size(); i++){
+            Equipo tmp = new Equipo();
+            Boolean salir = false;
+            while (salir.equals(false)){
+                String nombre = this.getParticipantes().get(i).getNombre();
+                System.out.println("A que equipo pertenece el ciclista "+ nombre + ":");
+                String strpesotmp = br.readLine();
 
-                }
             }
         }
-        catch (NullPointerException e){
-            System.out.println("No hay equipos registrados");
-        }
-
     }
 }
