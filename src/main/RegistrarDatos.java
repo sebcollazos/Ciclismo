@@ -58,9 +58,19 @@ public class RegistrarDatos {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
         System.out.println("Nombre del organizador del tour: ");
-        this.setOrganizador(br.readLine());
+        try {
+            this.setOrganizador(br.readLine());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         System.out.println("Nombre del tour: ");
-        String nombreTour = br.readLine();
+        String nombreTour = null;
+        try {
+            nombreTour = br.readLine();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         Boolean salir = false;
 
@@ -164,7 +174,12 @@ public class RegistrarDatos {
                 Ciclista ciclistatmp = this.getParticipantes().get(i);
                 String nombre = ciclistatmp.getNombre();
                 System.out.println("A que equipo pertenece el ciclista "+ nombre + ":");
-                String nombretmp = br.readLine();
+                String nombretmp = null;
+                try {
+                    nombretmp = br.readLine();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
                 if (i == 0){
                     Equipo equipotmp = new Equipo();
                     equipotmp.setNombre(nombretmp);
