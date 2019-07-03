@@ -25,34 +25,32 @@ public class Main {
             // Lectura del fichero
             String linea;
 
-            String[] parrafo= null;
-
             ArrayList<Equipo> equipos= new ArrayList<>();
 
             ArrayList<Ciclista> ciclistas= new ArrayList<>();
 
-            Equipo e= null;
+
 
 
             while((linea=br.readLine())!=null ) {
 
-                parrafo = linea.split(" ");
+                String[] parrafo= null;
+
+                parrafo = linea.split("/");
 
                 Ciclista c= null;
 
-
+                Equipo e= null;
 
                 c= crearCiclisita(parrafo, c);
 
-                if(parrafo.length >= 7){
+                if(parrafo.length >= 6){
 
                     agregarCiclista(c, ciclistas);
 
                 }
 
-                e= new Equipo();
-
-                crearequipo(e, parrafo, ciclistas);
+                e= crearequipo(e, parrafo);
 
                 agregarEquipo(e, equipos);
 
@@ -60,11 +58,19 @@ public class Main {
 
             if(equipos != null){
 
-                for(int i=0; i< equipos.get(0).getCicistas().size(); i++){
+                for(int i=0; i< equipos.size(); i++){
 
-                    System.out.println(e.getNombre());
+                    System.out.println(equipos.get(i).getNombre());
 
-                    System.out.println(e.getCicistas().get(i).getNombre()+" "+e.getCicistas().get(i).getNacionalidad());
+                }
+
+            }
+
+            if(ciclistas != null){
+
+                for(int i= 0; i < ciclistas.size(); i++){
+
+                    System.out.println(ciclistas.get(i).getNombre()+" "+ciclistas.get(i).getNacionalidad());
 
                 }
 
@@ -89,17 +95,17 @@ public class Main {
 
     public static Ciclista crearCiclisita(String[] ciclista, Ciclista c){
 
-        if(ciclista.length >= 7){
+        if(ciclista.length >= 6){
 
-            String nombre= ciclista[1]+ " " +ciclista[2];
+            String nombre= ciclista[1];
 
-            String nacionalidad= ciclista[3];
+            String nacionalidad= ciclista[2];
 
-            int edad= Integer.parseInt(ciclista[4]) ;
+            int edad= Integer.parseInt(ciclista[3]) ;
 
-            Double peso= Double.parseDouble(ciclista[5]);
+            Double peso= Double.parseDouble(ciclista[4]);
 
-            Double estatura= Double.parseDouble(ciclista[6]);
+            Double estatura= Double.parseDouble(ciclista[5]);
 
             c = new Ciclista(nombre, nacionalidad, edad, peso, estatura);
 
@@ -131,11 +137,13 @@ public class Main {
 
     }
 
-    public static void crearequipo(Equipo e, String[] p, ArrayList<Ciclista> c){
+    public static Equipo crearequipo(Equipo e, String[] p){
 
-        e.setNombre(p[0]);
+        ArrayList<Ciclista> c = new ArrayList<>();
 
-        e.setCicistas(c);
+        Equipo equipo= new Equipo(c, p[0]);
+
+        return equipo;
 
     }
 
@@ -145,20 +153,25 @@ public class Main {
 
         for(int i= 0; i < equipos.size(); i++){
 
-            if(equipos.get(i).getNombre().equals(e.getNombre()) && e != null){
+            if( ( equipos == null ) ){
+
+                equipos.add(e);
+
+            }else if( ( equipos.get(i).getNombre().equals(e.getNombre()) ) ){
 
                 contador++;
 
             }
-            else{
 
-                equipos.add(e);
 
-            }
 
         }
 
+        if(contador == 0){
 
+            equipos.add(e);
+
+        }
 
     }
 
