@@ -32,6 +32,18 @@ public class Tabla {
 
 
 
+    public boolean removeRegistp(String n){
+        for (int i = 0; i <= this.tabla.size(); i++){
+            if (this.tabla.get(i).getCiclista().getNombre().equals(n)){
+                this.tabla.remove(i);
+                return Boolean.TRUE;
+            }
+        }
+        return Boolean.FALSE;
+    }
+
+
+
     public void organizar(){
 
         for (int i = 0; i< this.tabla.size() - 1; i++){
