@@ -10,17 +10,14 @@ import java.util.ArrayList;
 public class GenerarTour {
 
 
+    public GenerarTour(){
 
-    public Tour crearTour() {
+    }
+
+
+    public Tour iniciarCrearTour() {
         System.out.println("Bienvenido al sistema de registro");
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        String organizador = null;
-        try {
-            organizador = br.readLine();
-        } catch (IOException e) {
-            //e.printStackTrace();
-        }
-
         System.out.println("Nombre del tour: ");
         String nombreTour = null;
         try {
@@ -50,12 +47,17 @@ public class GenerarTour {
                 System.out.println("No valido");
             }
         }
-        ArrayList<Ciclista>  ciclistas = new ArrayList<Ciclista>();
+        ArrayList<Ciclista>  ciclistas = new ArrayList<>();
         ciclistas = registrarCiclistas(br, cantidadCiclistas);
-        ArrayList<Equipo> equipos = new ArrayList<Equipo>();
+        ArrayList<Equipo> equipos = new ArrayList<>();
         evento = registrarTour(br, ciclistas, evento);
         int cantidadEtapas = generarEtapas(br);
         evento = llenarEtapas(br, evento, cantidadEtapas, ciclistas);
+        try {
+            br.close();
+        } catch (IOException e) {
+            //e.printStackTrace();
+        }
         return evento;
     }
 
@@ -64,23 +66,24 @@ public class GenerarTour {
     public ArrayList<Ciclista> registrarCiclistas(BufferedReader br, int cantidadCiclistas) {
 
         System.out.println("Registro de participantes: ");
-        ArrayList<Ciclista>  ciclistas = new ArrayList<Ciclista>();
+        ArrayList<Ciclista>  ciclistas = new ArrayList<>();
         for(int i = 0; i < cantidadCiclistas; i++){
             Boolean salir = Boolean.FALSE;
             //nombre, nacionalidad, edad, peso, estatura
             while (salir.equals(false)){
                 try{
-                    System.out.println("Digite el nombre del ciclista " + i +":" );
+                    int n = i + 1;
+                    System.out.println("Digite el nombre del ciclista " + n +":" );
                     String nombretmp = br.readLine();
-                    System.out.println("Digite la nacionalidad del ciclista " + i +":" );
+                    System.out.println("Digite la nacionalidad del ciclista " + n +":" );
                     String nacionalidadtmp = br.readLine();
-                    System.out.print("Digite la edad del ciclista " + i +":" );
+                    System.out.print("Digite la edad del ciclista " + n +":" );
                     String stredadtmp = br.readLine();
                     int edadtmp = Integer.parseInt(stredadtmp);
-                    System.out.print("Digite el peso del ciclista " + i +":" );
+                    System.out.print("Digite el peso del ciclista " + n +":" );
                     String strpesotmp = br.readLine();
                     Double pesotmp = Double.parseDouble(stredadtmp);
-                    System.out.print("Digite la estatura del ciclista " + i +":" );
+                    System.out.print("Digite la estatura del ciclista " + n +":" );
                     String strestaturatmp = br.readLine();
                     Double estaturatmp = Double.parseDouble(stredadtmp);
                     if ((edadtmp > 0) && (pesotmp > 0.0) && (estaturatmp > 0.0)){
@@ -122,7 +125,7 @@ public class GenerarTour {
 
 
     public Tour registrarTour(BufferedReader br, ArrayList<Ciclista> ciclistas, Tour evento) {
-        ArrayList<Equipo> equipos = new ArrayList<Equipo>();
+        ArrayList<Equipo> equipos = new ArrayList<>();
         System.out.println("Registro de equipos: ");
         for (int i = 0; i < ciclistas.size(); i++){
             Boolean salir = Boolean.FALSE;
@@ -144,7 +147,7 @@ public class GenerarTour {
                 agregado = evento.addEquipo(tmp);
                 if (agregado.equals(true)){
                     System.out.println("El equipo no existe, desea registrarlo [1]Si [2]No");
-                    String op = null;
+                    String op;
                     try {
                         op = br.readLine();
                         Boolean salir2 = Boolean.FALSE;
@@ -213,13 +216,14 @@ public class GenerarTour {
             Boolean salir = Boolean.FALSE;
             while (salir.equals(false)) {
                 try {
-                    System.out.println("Digite la altura inicial de la etapa " + i + ":");
+                    int n = i + 1;
+                    System.out.println("Digite la altura inicial de la etapa " + n + ":");
                     String alturaInicialtmp = br.readLine();
                     Double alturaInicial = Double.parseDouble(alturaInicialtmp);
-                    System.out.println("Digite la altura final de la etapa " +i+":");
+                    System.out.println("Digite la altura final de la etapa " + n +":");
                     String alturaFinaltmp = br.readLine();
                     Double alturaFinal = Double.parseDouble(alturaFinaltmp);
-                    System.out.println("Digite los kilometros a recorrer en la etapa "+i+":");
+                    System.out.println("Digite los kilometros a recorrer en la etapa "+ n +":");
                     String kilometrostmp = br.readLine();
                     Double kilometros = Double.parseDouble(kilometrostmp);
                     Etapa tmp = new Etapa(alturaInicial, alturaFinal, kilometros, ciclistas);

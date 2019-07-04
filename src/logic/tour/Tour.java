@@ -43,7 +43,7 @@ public class Tour {
 
 
     public Boolean addEquipo(Equipo e){
-        for (int i = 0; i<= this.equipos.size(); i++) {
+        for (int i = 0; i< this.equipos.size(); i++) {
             if (this.equipos.get(i).getNombre().equals(e.getNombre())){
                 return Boolean.FALSE;
             }
