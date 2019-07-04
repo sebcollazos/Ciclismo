@@ -18,9 +18,8 @@ public class GenerarTour {
     }
 
 
-    public Tour iniciarCrearTour() {
+    public Tour iniciarCrearTour(BufferedReader br) {
         System.out.println("Bienvenido al sistema de registro");
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         System.out.println("Nombre del tour: ");
         String nombreTour = null;
         try {
@@ -35,7 +34,6 @@ public class GenerarTour {
         int cantidadCiclistas = 0;
         while (salir.equals(false)) {
             try {
-
                 System.out.println("Digite la cantidad de paticipantes de "+nombreTour);
                 String cantidadCiclistastmp = br.readLine();
                 cantidadCiclistas = Integer.parseInt(cantidadCiclistastmp);
@@ -56,11 +54,6 @@ public class GenerarTour {
         evento = registrarTour(br, ciclistas, evento);
         int cantidadEtapas = generarEtapas(br);
         evento = llenarEtapas(br, evento, cantidadEtapas, ciclistas);
-        try {
-            br.close();
-        } catch (IOException e) {
-            //e.printStackTrace();
-        }
         Tabla  tabla  = new Tabla();
         tabla = registrarGeneral(ciclistas);
         evento.setGeneral(tabla);
@@ -160,9 +153,15 @@ public class GenerarTour {
                         while (salir2.equals(false)){
                             switch (op){
                                 case "1":
-                                    System.out.println("El equipo "+ nombretmp +" fue creado");
-                                    salir = Boolean.TRUE;
-                                    salir2 = Boolean.TRUE;
+                                    if (nombretmp.length() >= 3){
+                                        System.out.println("El equipo "+ nombretmp +" fue creado");
+                                        salir = Boolean.TRUE;
+                                        salir2 = Boolean.TRUE;
+                                    }
+                                    else {
+                                        System.out.println("El nombre del equipo es muy corto");
+                                        salir2 = Boolean.TRUE;
+                                    }
                                 break;
                                 case "2":
                                     evento.removeEquipo(nombretmp);
