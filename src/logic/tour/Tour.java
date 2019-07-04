@@ -35,13 +35,15 @@ public class Tour {
     public void setNombre(String nombre) { this.nombre = nombre; }
     public ArrayList<Equipo> getEquipos() { return equipos; }
     public void setEquipos(ArrayList<Equipo> equipos) { this.equipos = equipos; }
-    public ArrayList<Etapa> getEtapas() { return etapas; }
-
+    public ArrayList<Etapa> getEtapas() { return this.etapas; }
+    public void setEtapas(ArrayList<Etapa> etapas) { this.etapas = etapas; }
+    public Tabla getGeneral() { return general; }
+    public void setGeneral(Tabla general) { this.general = general; }
 
 
 
     public Boolean addEquipo(Equipo e){
-        for (int i = 0; i<= this.equipos.size(); i++) {
+        for (int i = 0; i< this.equipos.size(); i++) {
             if (this.equipos.get(i).getNombre().equals(e.getNombre())){
                 return Boolean.FALSE;
             }
