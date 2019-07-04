@@ -229,5 +229,12 @@ public class RegistrarDatos {
                 System.out.println("Dato no valido");
             }
         }
+        llenarEtapas(br);
+    }
+
+
+
+    public void llenarEtapas(BufferedReader br){
+        
     }
 }
