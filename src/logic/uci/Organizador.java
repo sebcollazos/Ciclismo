@@ -1,14 +1,19 @@
-package logic.tour;
+package logic.uci;
 import logic.ciclistas.Registro;
 import logic.tablaspuntuaciones.Tabla;
 import logic.tiempo.Tiempo;
+import logic.tour.Etapa;
+import logic.tour.Tour;
 import java.util.ArrayList;
-
-
 
 public class Organizador {
 
 
+
+
+    public Organizador(){
+
+    }
 
     public ArrayList<Double> calcularPuntosMontania(Etapa etapa){
 

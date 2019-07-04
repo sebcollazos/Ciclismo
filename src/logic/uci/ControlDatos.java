@@ -1,20 +1,17 @@
-package main;
+package logic.uci;
 import logic.ciclistas.Ciclista;
 import logic.ciclistas.Registro;
-import logic.tablaspuntuaciones.Tabla;
 import logic.tiempo.Tiempo;
-import logic.tour.Organizador;
 import logic.tour.Tour;
 
 import java.io.*;
-import java.nio.file.FileAlreadyExistsException;
 import java.util.ArrayList;
 
-public class GuardarDatos {
+public class ControlDatos {
 
 
 
-    public GuardarDatos(){
+    public ControlDatos(){
 
     }
 

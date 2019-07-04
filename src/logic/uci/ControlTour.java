@@ -1,4 +1,4 @@
-package main;
+package logic.uci;
 import logic.ciclistas.Ciclista;
 import logic.ciclistas.Equipo;
 import logic.ciclistas.Registro;
@@ -10,10 +10,10 @@ import java.io.*;
 import java.util.ArrayList;
 
 
-public class GenerarTour {
+public class ControlTour {
 
 
-    public GenerarTour(){
+    public ControlTour(){
 
     }
 
