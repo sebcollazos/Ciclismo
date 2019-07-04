@@ -40,9 +40,7 @@ public class Tour {
     public ArrayList<Equipo> getEquipos() {
         return equipos;
     }
-    public void setEquipos(ArrayList<Equipo> equipos) {
-        this.equipos = equipos;
-    }
+    public void setEquipos(ArrayList<Equipo> equipos) { this.equipos = equipos; }
     public ArrayList<Etapa> getEtapas() {
         return etapas;
     }
@@ -58,5 +56,17 @@ public class Tour {
         }
         this.equipos.add(e);
         return true;
+    }
+
+
+
+    public boolean removeEquipo(String n){
+        for (int i = 0; i <= this.equipos.size(); i++){
+            if (this.equipos.get(i).getNombre().equals(n)){
+                this.equipos.remove(i);
+                return true;
+            }
+        }
+        return false;
     }
 }
