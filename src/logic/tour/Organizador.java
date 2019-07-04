@@ -68,7 +68,7 @@ public class Organizador {
 
         }else {
 
-            for(int i=0; i< categoria.size(); i++){
+            for(int i=0; i < 6; i++){
                 categoria.add(i, 0.0);
             }
 
