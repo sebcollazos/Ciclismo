@@ -1,1 +1,4 @@
-50/100/2
+200/600/10
+Nairo Quintana/1/45/50/20
+sebastian collazos/6/20/0/10
+sebasaian velasco/2/15/30/15

@@ -2,7 +2,9 @@ package main;
 
 import logic.ciclistas.Ciclista;
 import logic.ciclistas.Equipo;
+import logic.ciclistas.Registro;
 import logic.tablaspuntuaciones.Tabla;
+import logic.tiempo.Tiempo;
 import logic.tour.Etapa;
 import logic.tour.Tour;
 
@@ -29,6 +31,10 @@ public class Main {
 
         ArrayList<Etapa> etapas = new ArrayList<>();
 
+        ArrayList<Registro> tabla= new ArrayList<>();
+
+        Tabla tablaDatos= new Tabla(tabla);
+
 
         directorio= new File ("C:\\Users\\Usuario\\Desktop\\Ciclismo-master\\Tour de francia");
 
@@ -37,7 +43,9 @@ public class Main {
 
         leerParticipantes(archivo, fr, br, equipos);
 
-        leerEtapas(etapa, fr, br, etapas);
+        tabla= crearTablaRegsitros(tabla, equipos);
+
+        leerEtapas(etapa, fr, br, etapas, tablaDatos);
 
     }
 
@@ -119,7 +127,7 @@ public class Main {
 
     }
 
-    public static void leerEtapas(File etapas, FileReader fr, BufferedReader br, ArrayList<Etapa> e){
+    public static void leerEtapas(File etapas, FileReader fr, BufferedReader br, ArrayList<Etapa> e, Tabla Lista){
 
         try{
 
@@ -144,7 +152,7 @@ public class Main {
 
                 String etapaPrueba= etapas.getName();
 
-                System.out.println(etapaPrueba);
+                //System.out.println(etapaPrueba);
 
                 while( (linea= br.readLine()) != null){
 
@@ -152,13 +160,19 @@ public class Main {
 
                     parrafo = linea.split("/");
 
-                    Etapa etapa= null;
+                    Etapa etapa= new Etapa();
 
                     etapa= crearEtapa(parrafo, etapa);
 
-                    System.out.println(etapa.getAlturaInicial()+" "+etapa.getAlturaFinal()+" "+etapa.getKilometros());
+
+
+                    etapa.setLista(Lista);
+
+                    e.add(etapa);
 
                 }
+
+
 
                 i++;
 
@@ -170,7 +184,8 @@ public class Main {
 
             }
 
-        }catch(Exception e){
+
+        }catch(Exception a){
             //e.printStackTrace();
         }finally{
 
@@ -299,7 +314,30 @@ public class Main {
 
     public static void agregarEtapas(Etapa etapa, ArrayList<Etapa> e){
 
+        e.add(etapa);
 
     }
+
+    public static ArrayList<Registro> crearTablaRegsitros(ArrayList<Registro> tabla, ArrayList<Equipo> equipos){
+
+        for(int j=0; j< equipos.size(); j++){
+
+            for(int k=0; k< equipos.get(j).getCicistas().size(); k++){
+
+                Tiempo t= new Tiempo(0,0,0);
+
+                Registro r= new Registro(equipos.get(j).getCicistas().get(k), t, 0.0);
+
+                tabla.add(r);
+
+            }
+
+        }
+
+        return tabla;
+
+    }
+
+
 
 }
