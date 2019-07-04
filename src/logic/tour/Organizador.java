@@ -82,7 +82,15 @@ public class Organizador {
                 p= p-1.0;
             }
         }else if(gradoMontania >= 20 && gradoMontania <30){
+
             categoria.add(0, 1.0);
+
+        }else {
+
+            for(int i=0; i< categoria.size(); i++){
+                categoria.add(i, 0.0);
+            }
+
         }
 
 

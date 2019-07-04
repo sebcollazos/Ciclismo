@@ -62,7 +62,10 @@ public class Main {
 
                 for(int i=0; i< equipos.size(); i++){
 
+                    equipos.get(i).generarCodigo();
+
                     System.out.println(equipos.get(i).getNombre());
+                    System.out.println(equipos.get(i).getCodigo());
 
                 }
 
