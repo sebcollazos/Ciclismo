@@ -2,7 +2,6 @@ package main;
 import logic.ciclistas.Ciclista;
 import logic.ciclistas.Equipo;
 import logic.tour.Tour;
-
 import java.io.*;
 import java.util.ArrayList;
 
@@ -15,6 +14,7 @@ public class RegistrarDatos {
     private int cantidadCiclistas;
     private ArrayList<Ciclista> participantes;
     private Tour tour;
+    private int cantidadEtapas;
 
 
 
@@ -28,31 +28,25 @@ public class RegistrarDatos {
     public String getOrganizador() {
         return organizador;
     }
-    public void setOrganizador(String organizador) {
-        this.organizador = organizador;
-    }
+    public void setOrganizador(String organizador) { this.organizador = organizador; }
     public int getCantidadCiclistas() {
         return cantidadCiclistas;
     }
-    public void setCantidadCiclistas(int cantidadCiclistas) {
-        this.cantidadCiclistas = cantidadCiclistas;
-    }
+    public void setCantidadCiclistas(int cantidadCiclistas) { this.cantidadCiclistas = cantidadCiclistas; }
     public ArrayList<Ciclista> getParticipantes() {
         return participantes;
     }
-    public void setParticipantes(ArrayList<Ciclista> participantes) {
-        this.participantes = participantes;
-    }
+    public void setParticipantes(ArrayList<Ciclista> participantes) { this.participantes = participantes; }
     public Tour getTour() {
         return tour;
     }
-    public void setTour(Tour tour) {
-        this.tour = tour;
-    }
+    public void setTour(Tour tour) { this.tour = tour; }
+    public int getCantidadEtapas() { return cantidadEtapas; }
+    public void setCantidadEtapas(int cantidadEtapas) { this.cantidadEtapas = cantidadEtapas; }
 
 
 
-    public void crearTour() throws IOException {
+    public void crearTour() {
 
         System.out.println("Bienvenido al sistema de registro");
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -60,7 +54,7 @@ public class RegistrarDatos {
         try {
             this.setOrganizador(br.readLine());
         } catch (IOException e) {
-            e.printStackTrace();
+            //e.printStackTrace();
         }
 
         System.out.println("Nombre del tour: ");
@@ -68,10 +62,10 @@ public class RegistrarDatos {
         try {
             nombreTour = br.readLine();
         } catch (IOException e) {
-            e.printStackTrace();
+            //e.printStackTrace();
         }
 
-        Boolean salir = false;
+        Boolean salir = Boolean.FALSE;
 
         while (salir.equals(false)) {
             try {
@@ -80,7 +74,7 @@ public class RegistrarDatos {
                 String cantidadCiclistastmp = br.readLine();
                 setCantidadCiclistas(Integer.parseInt(cantidadCiclistastmp));
                 if(this.cantidadCiclistas > 0){
-                    salir = true;
+                    salir = Boolean.TRUE;
                 }
                 else {
                     System.out.println("Dato no valido");
@@ -90,20 +84,16 @@ public class RegistrarDatos {
                 System.out.println("No valido");
             }
         }
-        registrarCiclistas();
+        registrarCiclistas(br);
     }
 
 
 
-    public void registrarCiclistas() throws IOException {
+    public void registrarCiclistas(BufferedReader br) {
 
         System.out.println("Registro de participantes: ");
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-
         for(int i = 0; i < this.getCantidadCiclistas(); i++){
-
-            Boolean salir = false;
-
+            Boolean salir = Boolean.FALSE;
             //nombre, nacionalidad, edad, peso, estatura
             while (salir.equals(false)){
                 try{
@@ -124,23 +114,23 @@ public class RegistrarDatos {
                         if (i == 0){
                             Ciclista tmp = new Ciclista(nombretmp, nacionalidadtmp, edadtmp, pesotmp, estaturatmp);
                             this.participantes.add(tmp);
-                            salir = true;
+                            salir = Boolean.TRUE;
                         }
                         else{
-                            Boolean registrado = false;
+                            Boolean registrado = Boolean.FALSE;
                             int a = 0;
                             while(a < this.participantes.size() && registrado.equals(false)){
                                 String nombre = this.participantes.get(a).getNombre();
                                 if (nombre.equals(nombretmp)){
                                     System.out.println("Ciclista ya registrado");
-                                    registrado = true;
+                                    registrado = Boolean.TRUE;
                                 }
                                 a = a + 1;
                             }
                             if (registrado.equals(false)){
                                 Ciclista tmp = new Ciclista(nombretmp, nacionalidadtmp, edadtmp, pesotmp, estaturatmp);
                                 this.participantes.add(tmp);
-                                salir = true;
+                                salir = Boolean.TRUE;
                             }
                         }
                     }
@@ -153,16 +143,15 @@ public class RegistrarDatos {
                 }
             }
         }
-        registrarTour();
+        registrarTour(br);
     }
 
 
 
-    public void registrarTour() {
-        System.out.println("Registro de participantes: ");
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    public void registrarTour(BufferedReader br) {
+        System.out.println("Registro de equipos: ");
         for (int i = 0; i < this.participantes.size(); i++){
-            Boolean salir = false;
+            Boolean salir = Boolean.FALSE;
             while (salir.equals(false)){
                 Ciclista ciclistatmp = this.getParticipantes().get(i);
                 String nombre = ciclistatmp.getNombre();
@@ -172,7 +161,7 @@ public class RegistrarDatos {
                     nombretmp = br.readLine();
                 }
                 catch (IOException e) {
-                    e.printStackTrace();
+                    //e.printStackTrace();
                 }
                 Equipo tmp = new Equipo();
                 tmp.setNombre(nombretmp);
@@ -184,38 +173,61 @@ public class RegistrarDatos {
                     String op = null;
                     try {
                         op = br.readLine();
-                        switch (op){
-                            case "1":
-                                System.out.println("El equipo "+ nombretmp +" fue creado");
-                                salir = true;
-                            break;
-                            case "2":
-                                this.tour.removeEquipo(nombretmp);
-                                System.out.println("Digite bien los datos");
-                            break;
-                            default:
-                                System.out.println("Opcion no valida");
-                            break;
+                        Boolean salir2 = Boolean.FALSE;
+                        while (salir2.equals(false)){
+                            switch (op){
+                                case "1":
+                                    System.out.println("El equipo "+ nombretmp +" fue creado");
+                                    salir = Boolean.TRUE;
+                                    salir2 = Boolean.TRUE;
+                                break;
+                                case "2":
+                                    this.tour.removeEquipo(nombretmp);
+                                    System.out.println("Digite bien los datos");
+                                    salir2 = Boolean.TRUE;
+                                break;
+                                default:
+                                    System.out.println("Opcion no valida");
+                                break;
+                            }
                         }
                     } catch (IOException e) {
-                        e.printStackTrace();
+                        //e.printStackTrace();
                     }
                 }
                 else {
                     for (int j = 0; j < this.tour.getEquipos().size(); j++){
                         if (this.tour.getEquipos().get(j).getNombre().equals(nombretmp)){
                             this.tour.getEquipos().get(j).addCiclista(ciclistatmp);
-                            salir = true;
+                            salir = Boolean.TRUE;
                         }
                     }
                 }
             }
         }
+        generarEtapas(br);
     }
 
 
 
-    public void generarEtapas(){
-
+    public void generarEtapas(BufferedReader br){
+        Boolean salir = Boolean.FALSE;
+        while (salir.equals(false)){
+            try {
+                System.out.println("Digite la cantidad de etapas del tour");
+                String cantidadEtapastmp = br.readLine();
+                int cantidadEtapas = Integer.parseInt(cantidadEtapastmp);
+                if(cantidadEtapas > 0){
+                    this.setCantidadEtapas(cantidadEtapas);
+                    salir = Boolean.TRUE;
+                }
+                else{
+                    System.out.println("Cantidad no valida");
+                }
+            } catch (IOException | NumberFormatException e) {
+                //e.printStackTrace();
+                System.out.println("Dato no valido");
+            }
+        }
     }
 }
