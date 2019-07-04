@@ -49,15 +49,21 @@ public class Main {
 
         for(int i=0; i< etapas.size(); i++){
 
-            System.out.println(etapas.get(i).getAlturaInicial());
+            if(etapas.get(i) != null){
 
-            for(int j=0; j< etapas.get(i).getLista().getTabla().size(); j++){
-
-                System.out.println(etapas.get(i).getLista().getTabla().get(j).getCiclista().getNombre()+" "+etapas.get(i).getLista().getTabla().get(j).getPuntos());
+                System.out.println(etapas.get(i).getAlturaInicial()+" "+etapas.get(i).getAlturaFinal()+" "+etapas.get(i).getKilometros()+"\n");
 
             }
 
+            for(int j=0; j< etapas.get(i).getLista().getTabla().size(); j++){
 
+                System.out.println(etapas.get(i).getLista().getTabla().get(j).getCiclista().getNombre()+" "
+                                    +etapas.get(i).getLista().getTabla().get(j).getTiempo().getHoras()+" "
+                                    +etapas.get(i).getLista().getTabla().get(j).getTiempo().getMinutos()+" "
+                                    +etapas.get(i).getLista().getTabla().get(j).getTiempo().getSegundos()+" "
+                                    +etapas.get(i).getLista().getTabla().get(j).getPuntos()+"\n");
+
+            }
 
         }
 
@@ -162,7 +168,7 @@ public class Main {
                 fr = new FileReader (etapas);
                 br = new BufferedReader(fr);
 
-
+                Etapa etapa= new Etapa();
 
                 String etapaPrueba= etapas.getName();
 
@@ -174,15 +180,25 @@ public class Main {
 
                     parrafo = linea.split("/");
 
-                    Etapa etapa= new Etapa();
+                    etapa= new Etapa();
 
-                    etapa= crearEtapa(parrafo, etapa);
 
-                    Lista= llenarTabla(parrafo, Lista);
 
-                    etapa.setLista(Lista);
+                    if(parrafo.length == 3){
 
-                    e.add(etapa);
+                        etapa= crearEtapa(parrafo, etapa);
+
+                        e.add(etapa);
+
+                    }
+
+                    if(parrafo.length == 5){
+
+                        Lista= llenarTabla(parrafo, Lista);
+
+                        e.get(i-1).setLista(Lista);
+
+                    }
 
                 }
 
@@ -330,16 +346,18 @@ public class Main {
 
         if(p.length == 5){
 
-            for(int i=0; i< tabla.getTabla().size(); i++){
+            for(int j=0; j< tabla.getTabla().size(); j++){
 
-                if(tabla.getTabla().get(i).getCiclista().getNombre().equals(p[0])){
+                if(tabla.getTabla().get(j).getCiclista().getNombre().equals(p[0])){
 
                     Tiempo t= new Tiempo(Integer.parseInt(p[1]), Integer.parseInt(p[2]), Integer.parseInt(p[3]));
 
                     Double puntos= Double.parseDouble(p[4]);
 
-                    tabla.getTabla().get(i).setTiempo(t);
-                    tabla.getTabla().get(i).setPuntos(puntos);
+                    tabla.getTabla().get(j).setTiempo(t);
+                    tabla.getTabla().get(j).setPuntos(puntos);
+
+                    return tabla;
 
                 }
 
@@ -348,12 +366,6 @@ public class Main {
         }
 
         return tabla;
-
-    }
-
-    public static void agregarEtapas(Etapa etapa, ArrayList<Etapa> e){
-
-        e.add(etapa);
 
     }
 
