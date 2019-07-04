@@ -48,7 +48,7 @@ public class Equipo {
     }
 
     public boolean addCiclista(Ciclista c) {
-        for (int i = 0; i<= this.ciclistas.size(); i++) {
+        for (int i = 0; i< this.ciclistas.size(); i++) {
             if (this.ciclistas.get(i).getNombre().equals(c.getNombre())){
                 return false;
             }

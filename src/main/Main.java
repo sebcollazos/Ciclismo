@@ -2,6 +2,7 @@ package main;
 
 import logic.ciclistas.Ciclista;
 import logic.ciclistas.Equipo;
+import logic.tour.Tour;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -11,26 +12,26 @@ import java.util.ArrayList;
 public class Main {
     public static void main(String[] args) {
 
-
+        File directorio= null;
         File archivo = null;
         FileReader fr = null;
         BufferedReader br = null;
 
         try {
 
-            archivo = new File ("C:\\Users\\Usuario\\Desktop\\Ciclismo-master\\Tour\\texo.txt");
+            directorio= new File ("C:\\Users\\Usuario\\Desktop\\Ciclismo-master\\Tour de francia");
+            archivo = new File ("C:\\Users\\Usuario\\Desktop\\Ciclismo-master\\Tour de francia\\participantes.txt");
             fr = new FileReader (archivo);
             br = new BufferedReader(fr);
 
             // Lectura del fichero
             String linea;
 
+            String nombreTour= directorio.getName();
+
+            ArrayList<Tour> tours= new ArrayList<Tour>();
+
             ArrayList<Equipo> equipos= new ArrayList<>();
-
-            ArrayList<Ciclista> ciclistas= new ArrayList<>();
-
-
-
 
             while((linea=br.readLine())!=null ) {
 
@@ -44,38 +45,36 @@ public class Main {
 
                 c= crearCiclisita(parrafo, c);
 
-                if(parrafo.length >= 6){
+                System.out.println(c.getNombre()+"\n");
 
-                    agregarCiclista(c, ciclistas);
+                if(parrafo.length >= 6){
 
                     e= crearequipo(e, parrafo);
 
+                    agregarCiclista(c, e, parrafo);
+
+                    agregarEquipo(e, equipos);
+
                 }
 
-
-
-                agregarEquipo(e, equipos);
-
             }
+
+
 
             if(equipos != null){
 
                 for(int i=0; i< equipos.size(); i++){
 
-                    equipos.get(i).generarCodigo();
-
                     System.out.println(equipos.get(i).getNombre());
                     System.out.println(equipos.get(i).getCodigo());
 
-                }
+                    for(int j=0; j< equipos.get(i).getCicistas().size(); j++){
 
-            }
+                        System.out.println(equipos.get(i).getCicistas().get(j).getNombre());
 
-            if(ciclistas != null){
+                    }
 
-                for(int i= 0; i < ciclistas.size(); i++){
-
-                    System.out.println(ciclistas.get(i).getNombre()+" "+ciclistas.get(i).getNacionalidad());
+                    System.out.println("\n");
 
                 }
 
@@ -120,35 +119,25 @@ public class Main {
 
     }
 
-    public static void agregarCiclista(Ciclista c, ArrayList<Ciclista> ciclistas){
-
-        int contador= 0;
-
-        for(int i= 0; i < ciclistas.size(); i++){
-
-            if(ciclistas.get(i).getNombre().equals(c.getNombre()) && c!= null){
-
-                contador++;
-
-            }
-
-        }
-
-        if(contador == 0){
-
-            ciclistas.add(c);
-
-        }
-
-    }
-
     public static Equipo crearequipo(Equipo e, String[] p){
 
         ArrayList<Ciclista> c = new ArrayList<>();
 
         Equipo equipo= new Equipo(c, p[0]);
 
+        equipo.generarCodigo();
+
         return equipo;
+
+    }
+
+    public static void agregarCiclista(Ciclista c, Equipo e, String[] p){
+
+        if( e.getNombre().equals(p[0]) ){
+
+            e.addCiclista(c);
+
+        }
 
     }
 
@@ -158,11 +147,29 @@ public class Main {
 
         for(int i= 0; i < equipos.size(); i++){
 
-            if( ( equipos == null ) ){
+            if( ( equipos.get(i).getNombre().equals(e.getNombre()) ) ){
 
-                equipos.add(e);
+                int cont2= 0;
 
-            }else if( ( equipos.get(i).getNombre().equals(e.getNombre()) ) ){
+                for(int j= 0; j<e.getCicistas().size(); j++){
+
+                    for(int k=0; k< equipos.get(i).getCicistas().size(); k++){
+
+                        if(equipos.get(i).getCicistas().get(k).getNombre().equals(e.getCicistas().get(j).getNombre())){
+
+                            cont2 ++;
+
+                        }
+
+                    }
+
+                    if(cont2 == 0){
+
+                        equipos.get(i).getCicistas().add(e.getCicistas().get(j));
+
+                    }
+
+                }
 
                 contador++;
 
@@ -175,6 +182,12 @@ public class Main {
             equipos.add(e);
 
         }
+
+    }
+
+    public static void crearTour(ArrayList<Equipo> e, String nombre){
+
+
 
     }
 
