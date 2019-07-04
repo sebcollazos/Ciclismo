@@ -49,12 +49,12 @@ public class Tabla {
             int num1 = tmp1.getTiempo().getSegundos() +
                     (tmp1.getTiempo().getMinutos() * 60) +
                     (tmp1.getTiempo().getHoras() * 60 * 60);
-            for (int k = i; k < this.tabla.size() - 2; k++){
+            for (int k = i; k < this.tabla.size() - 1; k++){
                 Registro tmp2 = this.tabla.get(k+1);
                 int num2 = tmp2.getTiempo().getSegundos() +
                         (tmp2.getTiempo().getMinutos() * 60) +
                         (tmp2.getTiempo().getHoras() * 60 * 60);
-                if (num2 > num1){
+                if (num2 < num1){
 
                     this.tabla.set(i, tmp2);
                     this.tabla.set(k+1, tmp1);

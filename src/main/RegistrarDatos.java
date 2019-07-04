@@ -1,7 +1,6 @@
 package main;
 import logic.ciclistas.Ciclista;
 import logic.ciclistas.Equipo;
-
 import java.io.*;
 import java.util.ArrayList;
 
@@ -228,5 +227,11 @@ public class RegistrarDatos {
                 }
             }
         }
+    }
+
+
+
+    public void generarEtapas(){
+
     }
 }
