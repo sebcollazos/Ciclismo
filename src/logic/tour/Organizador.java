@@ -2,7 +2,6 @@ package logic.tour;
 import logic.ciclistas.Registro;
 import logic.tablaspuntuaciones.Tabla;
 import logic.tiempo.Tiempo;
-
 import java.util.ArrayList;
 
 
@@ -68,7 +67,7 @@ public class Organizador {
 
         }else {
 
-            for(int i=0; i< categoria.size(); i++){
+            for(int i=0; i < 6; i++){
                 categoria.add(i, 0.0);
             }
 
@@ -84,7 +83,6 @@ public class Organizador {
 
 
         Tabla tablaGeneral= tour.getEtapas().get(0).getLista();
-
 
 
 

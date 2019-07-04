@@ -1,6 +1,9 @@
 package main;
 import logic.ciclistas.Ciclista;
 import logic.ciclistas.Equipo;
+import logic.ciclistas.Registro;
+import logic.tablaspuntuaciones.Tabla;
+import logic.tiempo.Tiempo;
 import logic.tour.Etapa;
 import logic.tour.Tour;
 import java.io.*;
@@ -58,6 +61,9 @@ public class GenerarTour {
         } catch (IOException e) {
             //e.printStackTrace();
         }
+        Tabla  tabla  = new Tabla();
+        tabla = registrarGeneral(ciclistas);
+        evento.setGeneral(tabla);
         return evento;
     }
 
@@ -242,4 +248,17 @@ public class GenerarTour {
         }
         return evento;
     }
+
+
+
+    public Tabla registrarGeneral(ArrayList<Ciclista> ciclistas){
+        Tabla general = new Tabla();
+        for (int i = 0; i < ciclistas.size(); i++){
+            Tiempo tmp1 = new Tiempo(0,0,0);
+            Registro tmp2 = new Registro(ciclistas.get(i), tmp1, 0.0);
+            general.addRegistro(tmp2);
+        }
+        return general;
+    }
+
 }

@@ -14,6 +14,7 @@ public class Registro {
 
 
     public Registro(){
+        this.ciclista = new Ciclista();
         this.tiempo = new Tiempo();
     }
     public Registro(Ciclista ciclista, Tiempo tiempo, Double puntos) {
