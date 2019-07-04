@@ -2,10 +2,13 @@ package main;
 
 import logic.ciclistas.Ciclista;
 import logic.ciclistas.Equipo;
+import logic.tablaspuntuaciones.Tabla;
+import logic.tour.Etapa;
 import logic.tour.Tour;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.ArrayList;
 
@@ -14,24 +17,47 @@ public class Main {
 
         File directorio= null;
         File archivo = null;
+        File etapa= null;
         FileReader fr = null;
         BufferedReader br = null;
 
+
+
+        ArrayList<Tour> tours= new ArrayList<>();
+
+        ArrayList<Equipo> equipos= new ArrayList<>();
+
+        ArrayList<Etapa> etapas = new ArrayList<>();
+
+
+        directorio= new File ("C:\\Users\\Usuario\\Desktop\\Ciclismo-master\\Tour de francia");
+
+        String nombreTour= directorio.getName();
+
+
+        leerParticipantes(archivo, fr, br, equipos);
+
+        leerEtapas(etapa, fr, br, etapas);
+
+    }
+
+    public static void leerParticipantes(File archivo, FileReader fr, BufferedReader br, ArrayList<Equipo> equipos){
+
         try {
 
-            directorio= new File ("C:\\Users\\Usuario\\Desktop\\Ciclismo-master\\Tour de francia");
             archivo = new File ("C:\\Users\\Usuario\\Desktop\\Ciclismo-master\\Tour de francia\\participantes.txt");
             fr = new FileReader (archivo);
             br = new BufferedReader(fr);
 
-            // Lectura del fichero
+
+
+
+
+            // Lectura del fichero participantes
             String linea;
 
-            String nombreTour= directorio.getName();
 
-            ArrayList<Tour> tours= new ArrayList<Tour>();
 
-            ArrayList<Equipo> equipos= new ArrayList<>();
 
             while((linea=br.readLine())!=null ) {
 
@@ -59,8 +85,6 @@ public class Main {
 
             }
 
-
-
             if(equipos != null){
 
                 for(int i=0; i< equipos.size(); i++){
@@ -80,8 +104,7 @@ public class Main {
 
             }
 
-        }
-        catch(Exception e){
+        }catch(Exception e){
             e.printStackTrace();
         }finally{
 
@@ -94,6 +117,71 @@ public class Main {
             }
         }
 
+    }
+
+    public static void leerEtapas(File etapas, FileReader fr, BufferedReader br, ArrayList<Etapa> e){
+
+        try{
+
+            Boolean salir= false;
+
+            int i= 1;
+
+
+            while(salir.equals(false)){
+
+                String nombre= "etapa ";
+
+                String linea;
+
+                String direccionEtapa= "C:\\Users\\Usuario\\Desktop\\Ciclismo-master\\Tour de francia\\"+nombre+i+".txt";
+
+                etapas = new File (direccionEtapa);
+                fr = new FileReader (etapas);
+                br = new BufferedReader(fr);
+
+
+
+                String etapaPrueba= etapas.getName();
+
+                System.out.println(etapaPrueba);
+
+                while( (linea= br.readLine()) != null){
+
+                    String[] parrafo= null;
+
+                    parrafo = linea.split("/");
+
+                    Etapa etapa= null;
+
+                    etapa= crearEtapa(parrafo, etapa);
+
+                    System.out.println(etapa.getAlturaInicial()+" "+etapa.getAlturaFinal()+" "+etapa.getKilometros());
+
+                }
+
+                i++;
+
+                if(etapas.length() == 0){
+
+                    salir= Boolean.TRUE;
+
+                }
+
+            }
+
+        }catch(Exception e){
+            //e.printStackTrace();
+        }finally{
+
+            try{
+                if( null != fr ){
+                    fr.close();
+                }
+            }catch (Exception e2){
+                e2.printStackTrace();
+            }
+        }
 
     }
 
@@ -187,6 +275,29 @@ public class Main {
 
     public static void crearTour(ArrayList<Equipo> e, String nombre){
 
+
+
+    }
+
+    public static Etapa crearEtapa( String[] p, Etapa etapa){
+
+        if(p.length == 3){
+
+            Double alturaInicial= Double.parseDouble(p[0]);
+            Double alturaFinal=Double.parseDouble(p[1]);
+            Double Kilometros= Double.parseDouble(p[2]);
+
+            ArrayList<Ciclista> lista= new ArrayList<>();
+
+            etapa= new Etapa(alturaInicial, alturaFinal, Kilometros, lista);
+
+        }
+
+        return etapa;
+
+    }
+
+    public static void agregarEtapas(Etapa etapa, ArrayList<Etapa> e){
 
 
     }

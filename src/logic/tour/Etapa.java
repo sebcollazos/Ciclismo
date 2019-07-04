@@ -19,7 +19,7 @@ public class Etapa {
 
 
     public Etapa(){
-
+        this.lista = new Tabla();
     }
     public Etapa(Double alturaInicial, Double alturaFinal, Double kilometros,
                  ArrayList<Ciclista> ciclistas) {
