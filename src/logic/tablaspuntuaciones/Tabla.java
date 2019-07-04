@@ -13,34 +13,24 @@ public class Tabla {
 
 
     public Tabla(){
-
+        this.tabla = new ArrayList<>();
     }
-
     public Tabla(ArrayList<Registro> tabla) {
-
         this.tabla = tabla;
-
     }
 
-    public ArrayList<Registro> getTabla() {
 
-        return this.tabla;
 
-    }
-
-    public void setTabla(ArrayList<Registro> reg) {
-
-        this.tabla = reg;
-
-    }
+    public ArrayList<Registro> getTabla() { return this.tabla; }
+    public void setTabla(ArrayList<Registro> reg) { this.tabla = reg; }
 
 
 
     public void addRegistro(Registro r){
-
         tabla.add(r);
-
     }
+
+
 
     public void organizar(){
 

@@ -22,10 +22,12 @@ public class Equipo {
         generarCodigo();
     }
 
-    public ArrayList<Ciclista> getCicistas() {
+
+
+    public ArrayList<Ciclista> getCiclistas() {
         return ciclistas;
     }
-    public void setCicistas(ArrayList<Ciclista> ciclistas) { this.ciclistas = ciclistas; }
+    public void setCiclistas(ArrayList<Ciclista> ciclistas) { this.ciclistas = ciclistas; }
     public String getCodigo() {
         return codigo;
     }
