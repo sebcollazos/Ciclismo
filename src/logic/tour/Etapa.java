@@ -37,29 +37,13 @@ public class Etapa {
 
 
 
-    public Double getAlturaInicial() {
-        return this.alturaInicial;
-    }
-    public void setAlturaInicial(Double alturaInicial) {
-        this.alturaInicial = alturaInicial;
-    }
-    public Double getAlturaFinal() {
-        return this.alturaFinal;
-    }
-    public void setAlturaFinal(Double alturaFinal) {
-        this.alturaFinal = alturaFinal;
-    }
-    public Double getKilometros() {
-        return this.Kilometros;
-    }
-    public void setKilometros(Double kilometros) {
-        Kilometros = kilometros;
-    }
-    public Tabla getLista() {
-        return this.lista;
-    }
-    public void setLista(Tabla lista) {
-        this.lista = lista;
-    }
+    public Double getAlturaInicial() { return this.alturaInicial; }
+    public void setAlturaInicial(Double alturaInicial) { this.alturaInicial = alturaInicial; }
+    public Double getAlturaFinal() { return this.alturaFinal; }
+    public void setAlturaFinal(Double alturaFinal) { this.alturaFinal = alturaFinal; }
+    public Double getKilometros() { return this.Kilometros; }
+    public void setKilometros(Double kilometros) { Kilometros = kilometros; }
+    public Tabla getLista() { return this.lista; }
+    public void setLista(Tabla lista) { this.lista = lista; }
 
 }

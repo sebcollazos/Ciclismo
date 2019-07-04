@@ -31,21 +31,11 @@ public class Tour {
 
 
 
-    public String getNombre() {
-        return nombre;
-    }
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-    public ArrayList<Equipo> getEquipos() {
-        return equipos;
-    }
-    public void setEquipos(ArrayList<Equipo> equipos) {
-        this.equipos = equipos;
-    }
-    public ArrayList<Etapa> getEtapas() {
-        return etapas;
-    }
+    public String getNombre() { return nombre; }
+    public void setNombre(String nombre) { this.nombre = nombre; }
+    public ArrayList<Equipo> getEquipos() { return equipos; }
+    public void setEquipos(ArrayList<Equipo> equipos) { this.equipos = equipos; }
+    public ArrayList<Etapa> getEtapas() { return etapas; }
 
 
 
@@ -53,11 +43,11 @@ public class Tour {
     public Boolean addEquipo(Equipo e){
         for (int i = 0; i<= this.equipos.size(); i++) {
             if (this.equipos.get(i).getNombre().equals(e.getNombre())){
-                return false;
+                return Boolean.FALSE;
             }
         }
         this.equipos.add(e);
-        return true;
+        return Boolean.TRUE;
     }
 
 
@@ -66,9 +56,29 @@ public class Tour {
         for (int i = 0; i <= this.equipos.size(); i++){
             if (this.equipos.get(i).getNombre().equals(n)){
                 this.equipos.remove(i);
-                return true;
+                return Boolean.TRUE;
             }
         }
-        return false;
+        return Boolean.FALSE;
+    }
+
+
+
+    public boolean addEtapa(Etapa etapa){
+        if (etapa.getAlturaInicial() >= 0 && etapa.getAlturaFinal() >= 0 && etapa.getKilometros() > 0){
+            this.etapas.add(etapa);
+            return Boolean.TRUE;
+        }
+        return Boolean.FALSE;
+    }
+
+
+
+    public boolean removeEtapa(int i){
+        if(i > 0){
+            this.etapas.remove(i-1);
+            return Boolean.TRUE;
+        }
+        return Boolean.FALSE;
     }
 }

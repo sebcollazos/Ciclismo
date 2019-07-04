@@ -1,6 +1,7 @@
 package main;
 import logic.ciclistas.Ciclista;
 import logic.ciclistas.Equipo;
+import logic.tour.Etapa;
 import logic.tour.Tour;
 import java.io.*;
 import java.util.ArrayList;
@@ -10,49 +11,13 @@ public class RegistrarDatos {
 
 
 
-    private String organizador;
-    private int cantidadCiclistas;
-    private ArrayList<Ciclista> participantes;
-    private Tour tour;
-    private int cantidadEtapas;
-
-
-
-    public RegistrarDatos() {
-        participantes = new ArrayList<>();
-        tour = new Tour();
-    }
-
-
-
-    public String getOrganizador() {
-        return organizador;
-    }
-    public void setOrganizador(String organizador) { this.organizador = organizador; }
-    public int getCantidadCiclistas() {
-        return cantidadCiclistas;
-    }
-    public void setCantidadCiclistas(int cantidadCiclistas) { this.cantidadCiclistas = cantidadCiclistas; }
-    public ArrayList<Ciclista> getParticipantes() {
-        return participantes;
-    }
-    public void setParticipantes(ArrayList<Ciclista> participantes) { this.participantes = participantes; }
-    public Tour getTour() {
-        return tour;
-    }
-    public void setTour(Tour tour) { this.tour = tour; }
-    public int getCantidadEtapas() { return cantidadEtapas; }
-    public void setCantidadEtapas(int cantidadEtapas) { this.cantidadEtapas = cantidadEtapas; }
-
-
-
-    public void crearTour() {
-
+    public Tour crearTour() {
         System.out.println("Bienvenido al sistema de registro");
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         System.out.println("Nombre del organizador del tour: ");
+        String organizador = null;
         try {
-            this.setOrganizador(br.readLine());
+            organizador = br.readLine();
         } catch (IOException e) {
             //e.printStackTrace();
         }
@@ -61,19 +26,21 @@ public class RegistrarDatos {
         String nombreTour = null;
         try {
             nombreTour = br.readLine();
+
         } catch (IOException e) {
             //e.printStackTrace();
         }
-
+        Tour evento = new Tour();
+        evento.setNombre(nombreTour);
         Boolean salir = Boolean.FALSE;
-
+        int cantidadCiclistas = 0;
         while (salir.equals(false)) {
             try {
 
                 System.out.println("Digite la cantidad de paticipantes de "+nombreTour);
                 String cantidadCiclistastmp = br.readLine();
-                setCantidadCiclistas(Integer.parseInt(cantidadCiclistastmp));
-                if(this.cantidadCiclistas > 0){
+                cantidadCiclistas = Integer.parseInt(cantidadCiclistastmp);
+                if(cantidadCiclistas > 0){
                     salir = Boolean.TRUE;
                 }
                 else {
@@ -84,15 +51,22 @@ public class RegistrarDatos {
                 System.out.println("No valido");
             }
         }
-        registrarCiclistas(br);
+        ArrayList<Ciclista>  ciclistas = new ArrayList<Ciclista>();
+        ciclistas = registrarCiclistas(br, cantidadCiclistas);
+        ArrayList<Equipo> equipos = new ArrayList<Equipo>();
+        evento = registrarTour(br, ciclistas, evento);
+        int cantidadEtapas = generarEtapas(br);
+        evento = llenarEtapas(br, evento, cantidadEtapas, ciclistas);
+        return evento;
     }
 
 
 
-    public void registrarCiclistas(BufferedReader br) {
+    public ArrayList<Ciclista> registrarCiclistas(BufferedReader br, int cantidadCiclistas) {
 
         System.out.println("Registro de participantes: ");
-        for(int i = 0; i < this.getCantidadCiclistas(); i++){
+        ArrayList<Ciclista>  ciclistas = new ArrayList<Ciclista>();
+        for(int i = 0; i < cantidadCiclistas; i++){
             Boolean salir = Boolean.FALSE;
             //nombre, nacionalidad, edad, peso, estatura
             while (salir.equals(false)){
@@ -113,14 +87,14 @@ public class RegistrarDatos {
                     if ((edadtmp > 0) && (pesotmp > 0.0) && (estaturatmp > 0.0)){
                         if (i == 0){
                             Ciclista tmp = new Ciclista(nombretmp, nacionalidadtmp, edadtmp, pesotmp, estaturatmp);
-                            this.participantes.add(tmp);
+                            ciclistas.add(tmp);
                             salir = Boolean.TRUE;
                         }
                         else{
                             Boolean registrado = Boolean.FALSE;
                             int a = 0;
-                            while(a < this.participantes.size() && registrado.equals(false)){
-                                String nombre = this.participantes.get(a).getNombre();
+                            while(a < ciclistas.size() && registrado.equals(false)){
+                                String nombre = ciclistas.get(a).getNombre();
                                 if (nombre.equals(nombretmp)){
                                     System.out.println("Ciclista ya registrado");
                                     registrado = Boolean.TRUE;
@@ -129,7 +103,7 @@ public class RegistrarDatos {
                             }
                             if (registrado.equals(false)){
                                 Ciclista tmp = new Ciclista(nombretmp, nacionalidadtmp, edadtmp, pesotmp, estaturatmp);
-                                this.participantes.add(tmp);
+                                ciclistas.add(tmp);
                                 salir = Boolean.TRUE;
                             }
                         }
@@ -143,17 +117,18 @@ public class RegistrarDatos {
                 }
             }
         }
-        registrarTour(br);
+        return ciclistas;
     }
 
 
 
-    public void registrarTour(BufferedReader br) {
+    public Tour registrarTour(BufferedReader br, ArrayList<Ciclista> ciclistas, Tour evento) {
+        ArrayList<Equipo> equipos = new ArrayList<Equipo>();
         System.out.println("Registro de equipos: ");
-        for (int i = 0; i < this.participantes.size(); i++){
+        for (int i = 0; i < ciclistas.size(); i++){
             Boolean salir = Boolean.FALSE;
             while (salir.equals(false)){
-                Ciclista ciclistatmp = this.getParticipantes().get(i);
+                Ciclista ciclistatmp = ciclistas.get(i);
                 String nombre = ciclistatmp.getNombre();
                 System.out.println("A que equipo pertenece el ciclista "+ nombre + ":");
                 String nombretmp = null;
@@ -167,7 +142,7 @@ public class RegistrarDatos {
                 tmp.setNombre(nombretmp);
                 tmp.addCiclista(ciclistatmp);
                 Boolean agregado;
-                agregado = this.tour.addEquipo(tmp);
+                agregado = evento.addEquipo(tmp);
                 if (agregado.equals(true)){
                     System.out.println("El equipo no existe, desea registrarlo [1]Si [2]No");
                     String op = null;
@@ -182,7 +157,7 @@ public class RegistrarDatos {
                                     salir2 = Boolean.TRUE;
                                 break;
                                 case "2":
-                                    this.tour.removeEquipo(nombretmp);
+                                    evento.removeEquipo(nombretmp);
                                     System.out.println("Digite bien los datos");
                                     salir2 = Boolean.TRUE;
                                 break;
@@ -196,29 +171,29 @@ public class RegistrarDatos {
                     }
                 }
                 else {
-                    for (int j = 0; j < this.tour.getEquipos().size(); j++){
-                        if (this.tour.getEquipos().get(j).getNombre().equals(nombretmp)){
-                            this.tour.getEquipos().get(j).addCiclista(ciclistatmp);
+                    for (int j = 0; j < evento.getEquipos().size(); j++){
+                        if (evento.getEquipos().get(j).getNombre().equals(nombretmp)){
+                            evento.getEquipos().get(j).addCiclista(ciclistatmp);
                             salir = Boolean.TRUE;
                         }
                     }
                 }
             }
         }
-        generarEtapas(br);
+        return evento;
     }
 
 
 
-    public void generarEtapas(BufferedReader br){
+    public int generarEtapas(BufferedReader br){
         Boolean salir = Boolean.FALSE;
+        int cantidadEtapas = 0;
         while (salir.equals(false)){
             try {
                 System.out.println("Digite la cantidad de etapas del tour");
                 String cantidadEtapastmp = br.readLine();
-                int cantidadEtapas = Integer.parseInt(cantidadEtapastmp);
+                cantidadEtapas = Integer.parseInt(cantidadEtapastmp);
                 if(cantidadEtapas > 0){
-                    this.setCantidadEtapas(cantidadEtapas);
                     salir = Boolean.TRUE;
                 }
                 else{
@@ -229,12 +204,39 @@ public class RegistrarDatos {
                 System.out.println("Dato no valido");
             }
         }
-        llenarEtapas(br);
+        return cantidadEtapas;
     }
 
 
 
-    public void llenarEtapas(BufferedReader br){
-        
+    public Tour llenarEtapas(BufferedReader br, Tour evento, int cantidadEtapas, ArrayList<Ciclista> ciclistas){
+        for (int i = 0; i < cantidadEtapas; i++) {
+            Boolean salir = Boolean.FALSE;
+            while (salir.equals(false)) {
+                try {
+                    System.out.println("Digite la altura inicial de la etapa " + i + ":");
+                    String alturaInicialtmp = br.readLine();
+                    Double alturaInicial = Double.parseDouble(alturaInicialtmp);
+                    System.out.println("Digite la altura final de la etapa " +i+":");
+                    String alturaFinaltmp = br.readLine();
+                    Double alturaFinal = Double.parseDouble(alturaFinaltmp);
+                    System.out.println("Digite los kilometros a recorrer en la etapa "+i+":");
+                    String kilometrostmp = br.readLine();
+                    Double kilometros = Double.parseDouble(kilometrostmp);
+                    Etapa tmp = new Etapa(alturaInicial, alturaFinal, kilometros, ciclistas);
+                    Boolean agregar = evento.addEtapa(tmp);
+                    if (agregar.equals(true)){
+                        salir = Boolean.TRUE;
+                    }
+                    else{
+                        System.out.println("Alguno de los datos no es valido");
+                    }
+                } catch (IOException | NumberFormatException e) {
+                    //e.printStackTrace();
+                    System.out.println("Dato no valido");
+                }
+            }
+        }
+        return evento;
     }
 }
