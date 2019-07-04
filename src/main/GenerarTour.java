@@ -7,14 +7,13 @@ import java.io.*;
 import java.util.ArrayList;
 
 
-public class RegistrarDatos {
+public class GenerarTour {
 
 
 
     public Tour crearTour() {
         System.out.println("Bienvenido al sistema de registro");
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        System.out.println("Nombre del organizador del tour: ");
         String organizador = null;
         try {
             organizador = br.readLine();
