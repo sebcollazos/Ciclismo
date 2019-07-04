@@ -48,9 +48,11 @@ public class Main {
 
                     agregarCiclista(c, ciclistas);
 
+                    e= crearequipo(e, parrafo);
+
                 }
 
-                e= crearequipo(e, parrafo);
+
 
                 agregarEquipo(e, equipos);
 
@@ -162,8 +164,6 @@ public class Main {
                 contador++;
 
             }
-
-
 
         }
 
