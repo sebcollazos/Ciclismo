@@ -47,6 +47,20 @@ public class Main {
 
         leerEtapas(etapa, fr, br, etapas, tablaDatos);
 
+        for(int i=0; i< etapas.size(); i++){
+
+            System.out.println(etapas.get(i).getAlturaInicial());
+
+            for(int j=0; j< etapas.get(i).getLista().getTabla().size(); j++){
+
+                System.out.println(etapas.get(i).getLista().getTabla().get(j).getCiclista().getNombre()+" "+etapas.get(i).getLista().getTabla().get(j).getPuntos());
+
+            }
+
+
+
+        }
+
     }
 
     public static void leerParticipantes(File archivo, FileReader fr, BufferedReader br, ArrayList<Equipo> equipos){
@@ -164,7 +178,7 @@ public class Main {
 
                     etapa= crearEtapa(parrafo, etapa);
 
-
+                    Lista= llenarTabla(parrafo, Lista);
 
                     etapa.setLista(Lista);
 
@@ -309,6 +323,31 @@ public class Main {
         }
 
         return etapa;
+
+    }
+
+    public static Tabla llenarTabla(String[] p, Tabla tabla){
+
+        if(p.length == 5){
+
+            for(int i=0; i< tabla.getTabla().size(); i++){
+
+                if(tabla.getTabla().get(i).getCiclista().getNombre().equals(p[0])){
+
+                    Tiempo t= new Tiempo(Integer.parseInt(p[1]), Integer.parseInt(p[2]), Integer.parseInt(p[3]));
+
+                    Double puntos= Double.parseDouble(p[4]);
+
+                    tabla.getTabla().get(i).setTiempo(t);
+                    tabla.getTabla().get(i).setPuntos(puntos);
+
+                }
+
+            }
+
+        }
+
+        return tabla;
 
     }
 
