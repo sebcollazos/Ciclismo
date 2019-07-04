@@ -1,6 +1,8 @@
 package main;
 import logic.ciclistas.Ciclista;
 import logic.ciclistas.Equipo;
+import logic.tour.Tour;
+
 import java.io.*;
 import java.util.ArrayList;
 
@@ -12,13 +14,13 @@ public class RegistrarDatos {
     private String organizador;
     private int cantidadCiclistas;
     private ArrayList<Ciclista> participantes;
-    private ArrayList<Equipo> equipos;
+    private Tour tour;
 
 
 
     public RegistrarDatos() {
         participantes = new ArrayList<>();
-        equipos = new ArrayList<>();
+        tour = new Tour();
     }
 
 
@@ -41,11 +43,11 @@ public class RegistrarDatos {
     public void setParticipantes(ArrayList<Ciclista> participantes) {
         this.participantes = participantes;
     }
-    public ArrayList<Equipo> getEquipos() {
-        return equipos;
+    public Tour getTour() {
+        return tour;
     }
-    public void setEquipos(ArrayList<Equipo> equipos) {
-        this.equipos = equipos;
+    public void setTour(Tour tour) {
+        this.tour = tour;
     }
 
 
@@ -53,9 +55,7 @@ public class RegistrarDatos {
     public void crearTour() throws IOException {
 
         System.out.println("Bienvenido al sistema de registro");
-
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-
         System.out.println("Nombre del organizador del tour: ");
         try {
             this.setOrganizador(br.readLine());
@@ -85,12 +85,9 @@ public class RegistrarDatos {
                 else {
                     System.out.println("Dato no valido");
                 }
-
             }
             catch (IOException | NumberFormatException e) {
-
                 System.out.println("No valido");
-
             }
         }
         registrarCiclistas();
@@ -156,18 +153,15 @@ public class RegistrarDatos {
                 }
             }
         }
-        registrarEquipos();
+        registrarTour();
     }
 
 
 
-    public void registrarEquipos() throws IOException {
-
+    public void registrarTour() {
         System.out.println("Registro de participantes: ");
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-
         for (int i = 0; i < this.participantes.size(); i++){
-
             Boolean salir = false;
             while (salir.equals(false)){
                 Ciclista ciclistatmp = this.getParticipantes().get(i);
@@ -176,52 +170,42 @@ public class RegistrarDatos {
                 String nombretmp = null;
                 try {
                     nombretmp = br.readLine();
-                } catch (IOException e) {
+                }
+                catch (IOException e) {
                     e.printStackTrace();
                 }
-                if (i == 0){
-                    Equipo equipotmp = new Equipo();
-                    equipotmp.setNombre(nombretmp);
-                    equipotmp.addCiclista(ciclistatmp);
-                    this.equipos.add(equipotmp);
-                    salir = true;
-                }
-                else{
-                    Boolean existente = false;
-                    int a = 0;
-                    while (a < this.equipos.size() && existente.equals(false)){
-                        if (this.getEquipos().get(a).getNombre().equals(nombretmp)){
-                            this.equipos.get(a).addCiclista(ciclistatmp);
-                            existente = true;
-                            salir = true;
+                Equipo tmp = new Equipo();
+                tmp.setNombre(nombretmp);
+                tmp.addCiclista(ciclistatmp);
+                Boolean agregado;
+                agregado = this.tour.addEquipo(tmp);
+                if (agregado.equals(true)){
+                    System.out.println("El equipo no existe, desea registrarlo [1]Si [2]No");
+                    String op = null;
+                    try {
+                        op = br.readLine();
+                        switch (op){
+                            case "1":
+                                System.out.println("El equipo "+ nombretmp +" fue creado");
+                                salir = true;
+                            break;
+                            case "2":
+                                this.tour.removeEquipo(nombretmp);
+                                System.out.println("Digite bien los datos");
+                            break;
+                            default:
+                                System.out.println("Opcion no valida");
+                            break;
                         }
-                        a = a + 1;
+                    } catch (IOException e) {
+                        e.printStackTrace();
                     }
-                    if (existente.equals(false)){
-                        System.out.println("El equipo no existe, desea registrarlo [1]Si [2]No :");
-                        try {
-                            String optmp = br.readLine();
-                            int op = Integer.parseInt(optmp);
-                            switch (op){
-                                case 1:
-                                    Equipo equipotmp = new Equipo();
-                                    equipotmp.setNombre(nombretmp);
-                                    equipotmp.addCiclista(ciclistatmp);
-                                    this.equipos.add(equipotmp);
-                                    salir = true;
-                                break;
-
-                                case 2:
-                                    System.out.println("Digite bien el nombre");
-                                break;
-
-                                default:
-                                    System.out.println("Opcion no valida, escriba nuevamente los datos");
-                                break;
-                            }
-                        }
-                        catch (IOException | NumberFormatException e) {
-                            System.out.println("Opcion no valida");
+                }
+                else {
+                    for (int j = 0; j < this.tour.getEquipos().size(); j++){
+                        if (this.tour.getEquipos().get(j).getNombre().equals(nombretmp)){
+                            this.tour.getEquipos().get(j).addCiclista(ciclistatmp);
+                            salir = true;
                         }
                     }
                 }
